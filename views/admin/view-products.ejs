@@ -1,0 +1,52 @@
+<section class="main-wrap mt-5">
+  <div class="container-fluid">
+    <a href="/admin/add-product">
+      <button class="btn btn-primary mb-2 bg-dark">Add Products</button>
+    </a>
+    <div class="row flex-column">
+      <div class="table-responsive-sm">
+        <table class="table" id="productsTable">
+          <thead>
+            <tr>
+              <th class="d-none d-sm-table-cell" scope="col">No</th>
+              <th scope="col">Name</th>
+              <th scope="col">Image</th>
+              <th scope="col">Price</th>
+              <th class="d-none d-sm-table-cell" scope="col">OfferPrice</th>
+              <th class="d-none d-sm-table-cell">Category</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Option</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% data.forEach(function(data,index){ %>
+              <tr>
+                <th class="d-none d-sm-table-cell" scope="row"><%=index+1%></th>
+                <td ><a href="/admin/fullImage/<%=data._id%>" style="color: black;"><%=data.ProductName%></td></a>
+                <td><a href="/admin/fullImage/<%=data._id%>" ><img src="/images/<%=data.Image[0]%>" style=" height:50px; width: 60px;" alt=""></a></td>
+                <td><%=data.Price%></td>
+                <td class="d-none d-sm-table-cell"><%=data.OfferPrice%></td>
+                <td class="d-none d-sm-table-cell"><%=data.Category%></td>
+                <% if(data.Quantity===0){ %>
+                    <td class="text-danger">out of stock</td>
+                <% }else{ %>
+                  <td><%=data.Quantity%></td>
+                <% } %>
+                <td>
+                  <a href="/admin/edit-product/<%=data._id%>" class="btn btn-success mr-1 btn-sm">Edit</a>
+                  <a href="/admin/delete-product/<%=data._id%>" class="btn btn-danger btn-sm mt-1" onclick="return confirm('Are you want to delete <%=data.ProductName%>');Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Item Added Successfully To Cart',
+                            showConfirmButton: false,
+                            timer: 2000
+                          })">Delete</a>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

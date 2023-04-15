@@ -1,0 +1,112 @@
+<section class="main-wrap">
+    <div class="main_container container">
+        <% if(Details.length==0){%>
+         <div class="d-flex justify-content-center align-items-center">
+           <h2 class="">No Orders Available</h2>
+         </div>
+         <%}else{%>
+            <h1 class="text-dark text-center pt-5">Sales Report</h1>
+         <div class="d-flex justify-content-center m-4">
+             <button type="button" class="btn btn-danger btn_print me-3" onclick="Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Download PDF Successfully',
+              showConfirmButton: false,
+              timer: 1500
+            })"
+                 value="Download as Pdf">Download PDF</button>
+             <button type="button" class="btn btn-danger btn_print me-3"  onclick="Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Download Excel Successfully',
+              showConfirmButton: false,
+              timer: 1500
+            })"
+                 value="Export to excel">Download as Excel</button>
+        
+         <div>
+     <!-- <form>
+     <div> <input type="date" name="startdate" id="startdate"></div>
+      
+       <div><input type="date" name="enddate" id="enddate" ></div>
+     </form> -->
+     <form action="/admin/sales-report" method="POST">
+       <div> <input type="date" name="startdate" id="startdate"></div>
+       <div><input type="date" name="enddate" id="enddate"></div>
+       
+     </div> 
+       <div class="ml-3 my-auto"><button class="btn btn-primary " type="submit">submit</button></div>
+        
+        <!-- <input class="ms-1" type="text" name="daterange" value="01/01/2022 - 12/01/2023"/> -->
+     </form>
+        
+         </div>
+         <td><img src="https://images.cooltext.com/5651101.png" alt=""></td>
+         <table class="table table-striped" id="container_content">
+         <thead>
+           <tr>
+             <th scope="col">OrderId</th>
+             <th scope="col">User Name</th>
+             <th scope="col">Item Name</th>
+             <th scope="col">Quantity</th>
+             <th scope="col">Price</th>
+             <th scope="col">Payment Method</th>
+             <th scope="col">Delivered Date</th>
+           </tr>
+         </thead>
+         <tbody style="background-color: cyan;">
+         
+            <% Details.map((data)=>{%>
+            <tr>
+                <td><%=data.orders._id%></td>
+                <td><%=shipping[0].shippingAddress[0].Address.fname%></td>
+                
+             <td><%=data.orders.productDetails[0].productName%></td>
+             
+             <td><%=data.orders.productDetails[0].quantity%></td>
+             <td><%=data.orders.productDetails[0].price%></td>
+              <td><%=data.orders.createdAt%></td>
+              <td><%=data.orders.paymentMethod%></td>
+            </tr>
+             <% })%>
+             
+            
+             <h4 class="text-left">Total Earnings: &nbsp; <span class="fw-bold"></span>₹<%=total%> </h4>
+            </tbody>
+       </table>
+     </div>
+     <br>
+     <br>
+     <hr>
+     <hr>
+     <%}%>
+     
+     </div>
+     
+</section>
+
+<script>
+    $(document).ready(function ($) {
+            $(document).on('click', '.btn_print', function (event) {
+                event.preventDefault();
+                var element = document.getElementById('container_content');
+                let randomNumber = Math.floor(Math.random() * (10000000000 - 1)) + 1;
+                var opt = {
+                    margin: 0,
+                    filename: 'SalesReport' + randomNumber + '.pdf',
+                    html2canvas: { scale: 10 },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                };
+                html2pdf().set(opt).from(element).save();
+            });
+        });
+        function export_data() {
+            let data = document.getElementById('container_content');
+            var fp = XLSX.utils.table_to_book(data, { sheet: 'vishal' });
+            XLSX.write(fp, {
+                bookType: 'xlsx',
+                type: 'base64'
+            });
+            XLSX.writeFile(fp, 'test.xlsx');
+        }
+    </script>

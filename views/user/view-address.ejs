@@ -1,0 +1,156 @@
+<% if(!result){  %>
+    <div class="container-fluid  mt-100">
+  
+       
+       
+         
+        <div class="card-body cart">
+            <div class="col-sm-12 empty-cart-cls text-center">
+              <!-- <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3"> -->
+              <h3><strong>No Address</strong></h3>
+              <br>
+              <h4>No Address:)</h4>
+              <a href="/add-new-address"class="btn btn-primary cart-btn-transform m-3" data-abc="true">Add New Address</a>
+              
+            
+            </div>
+        </div>
+    </div> 
+        
+      
+      </div>
+     
+     </div>
+    
+    </div>
+    
+    
+    <style>
+     
+     @import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
+    
+    body {
+     background-color: #eee;
+     font-family: 'Calibri', sans-serif !important;
+    }
+    
+    .mt-100{
+    margin-top:100px;
+    
+    }
+    
+    
+    .card {
+     margin-bottom: 30px;
+     border: 0;
+     -webkit-transition: all .3s ease;
+     transition: all .3s ease;
+     letter-spacing: .5px;
+     border-radius: 8px;
+     -webkit-box-shadow: 1px 5px 24px 0 rgba(68,102,242,.05);
+     box-shadow: 1px 5px 24px 0 rgba(68,102,242,.05);
+    }
+    
+    .card .card-header {
+     background-color: #fff;
+     border-bottom: none;
+     padding: 24px;
+     border-bottom: 1px solid #f6f7fb;
+     border-top-left-radius: 8px;
+     border-top-right-radius: 8px;
+    }
+    
+    .card-header:first-child {
+     border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+    }
+    
+    
+    
+    .card .card-body {
+     padding: 30px;
+     background-color: transparent;
+    }
+    
+    .btn-primary, .btn-primary.disabled, .btn-primary:disabled {
+     background-color: #4466f2!important;
+     border-color: #4466f2!important;
+    }
+    </style>
+<% }else{ %>
+
+<h1 style="text-align: center; margin: 2rem">Address details</h1>
+ <% result.Address.forEach(function(response){ %>
+<div class="col-md-6 container">
+  <div class="order_review">
+    <div>
+      <div class="payment_option">
+        <div
+          class="list-group-item"
+          style="border-radius: 1rem; padding: 1.5rem; margin-bottom: 2rem"
+        >
+          <div class="list-group-item-heading">
+            <div class="row radio">
+              <div class="col-xs-3">
+                <label>
+                  <input
+                    type="radio"
+                    name="address"
+                    id="address1"
+                    value="<%=response._id%>"
+                    style="height: 1.2rem; width: 1.2rem"
+                    checked
+                  />
+                 <%=response.fname%>:<%=response.lname%>
+                </label>
+              </div>
+              <div class="col-xs-5">
+                <dl class="dl-small">
+                  <dt><%=response.street%></dt>
+                  <dd><%=response.apartment%></dd>
+                  <dd><%=response.city%></dd>
+                  <dd><%=response.state%></dd>
+                  <dd><%=response.pincode%></dd>
+                  <dd><%=response.mobile%></dd>
+                  <dd><%=response.email%></dd>
+                </dl>
+                <!-- <button class="btn btn-sm">Edit</button>
+                        <button class="btn btn-sm btn-link">
+                          Delete this address
+                        </button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        class="btn bg-dark"
+        onclick="deleteAddress('<%=response._id%>','<%=result._id%>')"
+      >
+        Delete
+      </button>
+      <a href="/edit-address/<%=response._id%>">
+      <button class="btn bg-dark">Edit</button>
+    </a>
+    </div>
+  </div>
+</div>
+<br />
+<% }) %>
+
+<% } %>
+
+<script>
+    function deleteAddress(deleteId,addressId){
+        $.ajax({
+            url:'/delete-new-address',
+            data:{deleteId,addressId},
+            method:'delete',
+            success:(response)=>{
+                if(response.status){
+                    location.reload()
+                }
+            }
+        })
+    }
+  
+</script>

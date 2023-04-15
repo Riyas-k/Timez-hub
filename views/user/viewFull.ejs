@@ -1,0 +1,281 @@
+
+<div class="mobile-header-active mobile-header-wrapper-style">
+    <div class="mobile-header-wrapper-inner">
+        <div class="mobile-header-top">
+            <div class="mobile-header-logo">
+                <!-- <a href="index.html"><img src="assets/imgs/theme/logo.svg" alt="logo"></a> -->
+            </div>
+            <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
+                <button class="close-style search-close">
+                    <i class="icon-top"></i>
+                    <i class="icon-bottom"></i>
+                </button>
+            </div>
+        </div>
+        <div class="mobile-header-content-area">
+            <div class="mobile-search search-style-3 mobile-header-border">
+                <form action="#">
+                    <input type="text" placeholder="Search for items…">
+                    <button type="submit"><i class="fi-rs-search"></i></button>
+                </form>
+            </div>
+            <div class="mobile-menu-wrap mobile-header-border">
+       
+                <!-- mobile menu start -->
+                <nav>
+                    <ul class="mobile-menu">
+                        <li class="menu-item-has-children"><span class="menu-expand"></span><a href="/">Home</a>
+                         
+                        </li>
+                        <li class="menu-item-has-children"><span class="menu-expand"></span><a href="/shop">shop</a>
+                           
+                        </li>
+                   
+                        <li class="menu-item-has-children"><span class="menu-expand"></span><a href="/orders">Orders</a>
+                          
+                        </li>
+                       
+                    </ul>
+                </nav>
+                <!-- mobile menu end -->
+            </div>
+            <!-- <div class="mobile-header-info-wrap mobile-header-border">
+                <div class="single-mobile-header-info mt-30">
+                    <a  href="page-contact.html"> Our location </a>
+                </div>
+                <div class="single-mobile-header-info">
+                    <a href="page-login-register.html">Log In / Sign Up </a>
+                </div>
+                <div class="single-mobile-header-info">
+                    <a href="#">(+01) - 2345 - 6789 </a>
+                </div>
+            </div> -->
+            <!-- <div class="mobile-social-icon">
+                <h5 class="mb-15 text-grey-4">Follow Us</h5>
+                <a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a>
+                <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a>
+                <a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a>
+                <a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
+                <a href="#"><img src="assets/imgs/theme/icons/icon-youtube.svg" alt=""></a>
+            </div> -->
+        </div>
+    </div>
+</div>
+<main class="main">
+    <!-- <div class="page-header breadcrumb-wrap"> -->
+        <!-- <div class="container"> -->
+            <!-- <div class="breadcrumb">
+                <a href="index.html" rel="nofollow">Home</a>
+                <span></span> Fashion
+                <span></span> Abstract Print Patchwork Dress
+            </div> -->
+        <!-- </div> -->
+    <!-- </div> -->
+    <section class="mt-50 mb-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="product-detail accordion-detail">
+                        <div class="row mb-50">
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="detail-gallery">
+                                    <span class="zoom-icon"><i class="fi-rs-search"></i></span>
+                                    <!-- MAIN SLIDES -->
+                                    <div class="product-image-slider">
+                                        <% data.Image.forEach(function(image) { %>
+                                          <figure class="border-radius-10">
+                                            <img src="/images/<%= image %>" alt="product image" style="height: 500px; width: 550px;">
+                                          </figure>
+                                        
+                                     
+                                        <% }) %>
+                                      </div>
+                                      
+                                      <!-- THUMBNAILS -->
+                                      <div class="slider-nav-thumbnails">
+                                        <% data.Image.forEach(function(image) { %>
+                                          <div><img src="/images/<%= image %>" alt="product image" style="height: 100px;"></div>
+                                        <% }); %>
+                                      </div>
+                                      
+                                </div>
+                                <!-- End Gallery -->
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="detail-info">
+                                    <h2 class="title-detail"><%= data.ProductName %></h2>
+                                    <div class="product-detail-rating">
+                                        <div class="pro-details-brand">
+                                            <!-- <span> Brands: <a href="shop-grid-right.html">Bootstrap</a></span> -->
+                                        </div>
+                                      
+                                    </div>
+                                    <div class="clearfix product-price-cover">
+                                        <div class="product-price primary-color float-left">
+                                      
+                                                <span>OFFER PRICE- ₹<%=data.OfferPrice%></span>
+                                                <br>
+                                                <br>
+                                              <span>OLD PRICE-<s class="old-price">₹<%=data.Price%></s></span>
+                                            </div>
+                                    </div>
+                                    <div class="bt-1 border-color-1 mt-15 mb-15"></div>
+                                 
+                                    <div class="product_sort_info font-xs mb-30">
+                                        <ul>
+                                            <li class="mb-10"><i class="fi-rs-crown mr-5"></i> <%=data.Description%></li>
+                                            <li class="mb-10"><i class="fi-rs-refresh mr-5"></i><%=data.Category%></li>
+                                            <!-- <li><i class="fi-rs-credit-card mr-5"></i> Cash on Delivery available</li> -->
+                                        </ul>
+                                    </div>
+                                    <!-- <div class="attr-detail attr-color mb-15">
+                                        <strong class="mr-10">Color</strong>
+                                        <ul class="list-filter color-filter">
+                                            <li><a href="#" data-color="Red"><span class="product-color-red"></span></a></li>
+                                            <li><a href="#" data-color="Yellow"><span class="product-color-yellow"></span></a></li>
+                                            <li class="active"><a href="#" data-color="White"><span class="product-color-white"></span></a></li>
+                                            <li><a href="#" data-color="Orange"><span class="product-color-orange"></span></a></li>
+                                            <li><a href="#" data-color="Cyan"><span class="product-color-cyan"></span></a></li>
+                                            <li><a href="#" data-color="Green"><span class="product-color-green"></span></a></li>
+                                            <li><a href="#" data-color="Purple"><span class="product-color-purple"></span></a></li>
+                                        </ul>
+                                    </div> -->
+                                    <!-- <div class="attr-detail attr-size">
+                                        <strong class="mr-10">Size</strong>
+                                        <ul class="list-filter size-filter font-small">
+                                            <li><a href="#">S</a></li>
+                                            <li class="active"><a href="#">M</a></li>
+                                            <li><a href="#">L</a></li>
+                                            <li><a href="#">XL</a></li>
+                                            <li><a href="#">XXL</a></li>
+                                        </ul>
+                                    </div> -->
+                                    <div class="bt-1 border-color-1 mt-30 mb-30"></div>
+                                    <div class="detail-extralink">
+                                        <!-- <div class="detail-qty border radius">
+                                            <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                            <span class="qty-val">1</span>
+                                            <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                        </div> -->
+                                        <% if(data.Quantity>0){ %>
+
+                                            <div class="product-extra-link2">
+                                                <button type="submit" onclick="addToCart('<%= data._id %>'); Swal.fire({
+                                                    position: 'center',
+                                                    icon: 'success',
+                                                    title: 'Item Added Successfully To Cart',
+                                                    showConfirmButton: false,
+                                                    timer: 2000
+                                                })"  class="button button-add-to-cart bg-dark">Add to cart</button>
+                                            <!-- <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                                <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a> -->
+                                            </div>
+                                            <%} else{ %>
+                                                <p class="text-danger">out-of-stock</p>
+                                           <% } %>
+                                    </div>
+                                    <!-- <ul class="product-meta font-xs color-grey mt-50">
+                                        <li class="mb-5">SKU: <a href="#">FWM15VKT</a></li>
+                                        <li class="mb-5">Tags: <a href="#" rel="tag">Cloth</a>, <a href="#" rel="tag">Women</a>, <a href="#" rel="tag">Dress</a> </li>
+                                        <li>Availability:<span class="in-stock text-success ml-5">8 Items In Stock</span></li>
+                                    </ul> -->
+                                </div>
+                                <!-- Detail Info -->
+                            </div>
+                        </div>
+                       
+    </section>
+    <section class="section-padding footer-mid">
+        <div class="container pt-15 pb-20">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    
+                </div>
+                <div class="col-lg-2 col-md-3">
+                    <h5 class="widget-title wow fadeIn animated">About</h5>
+                    <ul class="footer-list wow fadeIn animated mb-sm-5 mb-md-0">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Delivery Information</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms &amp; Conditions</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Support Center</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2  col-md-3">
+                    <h5 class="widget-title wow fadeIn animated">My Account</h5>
+                    <ul class="footer-list wow fadeIn animated">
+                        <li><a href="#">Sign In</a></li>
+                        <li><a href="#">View Cart</a></li>
+                        <li><a href="#">My Wishlist</a></li>
+                        <li><a href="#">Track My Order</a></li>
+                        <li><a href="#">Help</a></li>
+                        <li><a href="#">Order</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <!-- <h5 class="widget-title wow fadeIn animated">Install App</h5> -->
+                    <div class="row">
+                        <div class="col-md-8 col-lg-12">
+                         
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-lg-12 mt-md-3 mt-lg-0">
+                            <p class="mb-20 wow fadeIn animated">Secured Payment Gateways</p>
+                            <img class="wow fadeIn animated" src="assets/imgs/theme/payment-method.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- <div class="container pb-20 wow fadeIn animated">
+        <div class="row">
+            <div class="col-12 mb-20">
+                <div class="footer-bottom"></div>
+            </div>
+            <div class="col-lg-6">
+                <p class="float-md-left font-sm text-muted mb-0">&copy; 2021, <strong class="text-brand">Evara</strong> - HTML Ecommerce Template </p>
+            </div>
+            <div class="col-lg-6">
+                <p class="text-lg-end text-start font-sm text-muted mb-0">
+                    Designed by <a href="http://alithemes.com/" target="_blank">Alithemes.com</a>. All rights reserved
+                </p>
+            </div>
+        </div>
+    </div> -->
+</footer>
+<!-- Preloader Start -->
+<div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="text-center">
+                <h5 class="mb-5">TIMES HUB</h5>
+                <div class="loader">
+                    <div class="bar bar1"></div>
+                    <div class="bar bar2"></div>
+                    <div class="bar bar3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function addToCart(proId){
+  $.ajax({
+    url:'/addToCart/'+proId,
+    method:'get',
+     success:(response)=>{
+    
+      if(response.status){
+        // console.log('set');
+        let count = $('#cartCount').html()
+        count = parseInt(count)+1
+        $('#cartCount').html(count)
+      }
+     }
+  })
+}
+
+</script>

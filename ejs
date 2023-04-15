@@ -1,0 +1,291 @@
+<!-- <script>
+     <% if(order.orders.orderStatus==='Placed') { %>
+      <button class="btn btn-danger" onclick="cancelOrder('<%=order.orders._id%>'); Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Order Canceled',
+                showConfirmButton: false,
+                timer: 2000
+              })">Cancel</button>
+              <% }else { %>
+              <button class="btn btn-danger" style="background-color: red;">Canceled</button>
+              <button class="" onclick="deleteOrder('<%=order.orders._id%>');Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Order Deleted',
+                showConfirmButton: false,
+                timer: 2000
+              }) "><i class="fa-solid fa-trash-can"></i></button>
+              <% } %> 
+</script>  -->
+<!-- 
+<%if(orderDetails.orderStatus == 'Delivered'){%>
+          
+    <button  class=" mt-5 btn btn-suucess" onclick="invoiceCreator()">Download invoice</button>
+  <%}%> -->
+
+  <!-- <p style="display: none"; id="yadhu"><%= JSON.stringify(locals.data) %></p> -->
+
+
+
+  <!-- <section style="margin-top: 5%; margin-bottom: 5%;">
+    <div class="container mt-5" style="padding: 5%; box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);">
+        <form action="" id="checkout-form">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Enter Delivery Details</h2>
+                    <div>
+
+                        <label for="">Address</label>
+                        <input class="form-control" type="text" id="address" name="address" >
+                        <label for="">Mobile</label>
+                        <input class="form-control" type="text" id="mobile" name="mobile" >
+                        <label for="">State</label>
+                        <input class="form-control" type="text" id="state" name="state" >
+                        <label for="">Pincode</label>
+                        <input class="form-control" type="text" id="pincode" name="pincode" >
+                        <input type="text" name="user" id="" value="<%=user.id%>" hidden>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="container mt-5 ml-5 checkout" style="padding: 5%; background: #ffffff; box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);">
+                        <h5>Total Amount: Rs</h5>
+                        <hr>
+                        <div class="payment">
+                            <p>Payment Method</p>
+                            <label class="radio-inline">
+                                <input type="radio" name="PaymentMethod" value="COD" checked>COD
+                            </label>
+                            <label class="radio-inline mt-2">
+                                <input type="radio" name="PaymentMethod" value="ONLINE">Online Payment
+                            </label>
+                             
+                        </div>
+                        <button class="float-right btn btn-primary" type="submit" style="background-color: #26927E;">  <i class="fi-rs-box-alt mr-10"></i>Place Order</button>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</section>
+
+
+<style>
+    input[type=radio] {
+        width: 20px;
+        height: 20px;
+    }
+
+    label.radio-inline {
+        display: flex;
+        align-items: center;
+    }
+
+    .checkout {
+        border: 1px solid;
+        border-radius: 3px;
+        padding: 30px;
+    }
+
+    .payment {
+        padding-bottom: 16px;
+    }
+</style>
+ -->
+ 
+ <!-- <section class="mt-50 mb-50">
+  <div class="container">
+     <a href="/add-address" style="margin-bottom: 20px;" class="btn btn-primary"> <h5>+ Add an address</h5></a>
+ 
+
+   <div class="row">
+     
+     <div class="col-md-6">
+         
+       <div class="mb-25">
+         <h4>Select Your Address</h4>
+       </div>
+       <br />
+
+       <form action="/placeOrder" method="POST" id="checkout-form">
+         <div>
+           <div class="payment_option">
+             <div
+               class="list-group-item"
+               style="
+                 border-radius: 1rem;
+                 padding: 1.5rem;
+                 margin-bottom: 2rem;
+               "
+             >
+               <div class="list-group-item-heading">
+                 <% Address.Address.forEach(function(data){ %>
+                  <div class="row radio">
+                    <div class="col-xs-3 col-sm-2 col-md-1">
+                        <input
+                        type="radio" required
+                        name="address"
+                        id="address1"
+                       
+                        style="height: 1.2rem; width: 1.2rem"
+                        checked
+                      
+                        />
+                        <label aria-required="true" for="" name="address"><%=data.street%>,<%=data.apartment%>,<%=data.state%>,<%=data.city%>,<%=data.pincode%> ,<%=data.mobile%></label>
+                       <button class="" id="delete" onclick="deleteAddress('<%=data._id%>')"><i class="fa-solid fa-trash-can"></i></button>
+                     
+                    </div>
+                  </div>
+                 <% }) %>
+              
+               </div>
+             </div>
+           </div>
+         </div>
+         <div class="payment_method">
+           <p>Payment Method</p>
+           <div class="form-check">
+             <input
+               class="form-check-input"
+               type="radio"
+               name="payment-method"
+               value="COD"
+               checked
+             />
+             <label class="form-check-label" for="flexRadioDefault1">
+               COD
+             </label>
+           </div>
+           <div class="form-check">
+             <input
+               class="form-check-input"
+               type="radio"
+               name="payment-method"
+               value="online"
+             />
+             <label class="form-check-label" for="flexRadioDefault1">
+               Razorpay
+             </label>
+           </div>
+           <div class="form-check">
+
+             <input
+               class="form-check-input"
+               type="radio"
+               name="payment-method"
+               value="paypal"
+             />
+             <label class="form-check-label" for="flexRadioDefault1">
+               Paypal
+             </label>
+             <div id="paypal"></div>
+           </div>
+           <div class="form-group">
+             <input type="text" name="user" id="" value="<%=user.id%>" hidden>
+           </div>
+         </div>
+         <button type="submit" class="btn btn-fill-out btn-block mt-30">
+           Proceed to payment
+
+         </button>
+       </form>
+   
+       <br/>
+        
+      </div>
+    
+      <div class="col-md-6">
+        <div class="order_review">
+          <div class="mb-20">
+            <h4>Your Orders</h4>
+          </div>
+          <div class="table-responsive order_table text-center">
+            <table class="table">
+              <thead>
+                  <% cartItems.forEach(function(items,index){ %>
+
+                <tr>
+                  <th colspan="2">Product</th>
+                  <th>Price</th>
+                 
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="image product-thumbnail">
+                      <a href="/fullImage/<%= items.carted._id %>">
+                    <img src="/images/<%=items.carted.Image[0]%>" />
+                  </td>
+                  <td>
+                    <h5>
+                      <%=items.carted.ProductName%></a
+                      >
+                    </h5>
+                  </a>
+                    <span class="product-qty">Quantity - <%=items.quantity%></span>
+                  </td>
+                  <td><%=items.carted.OfferPrice%></td>
+                </tr>
+                <% }) %>
+                <!-- <tr>
+              <th>SubTotal</th>
+              <td class="product-subtotal" colspan="2">$280.00</td>
+              </tr> -->
+                <!-- <tr> -->
+<!-- 
+                  <th>Shipping</th>
+                  <td colspan="2"><em>Free Shipping</em></td>
+                </tr>
+                <tr>
+                  <th>Total</th>
+                  <td colspan="2" id="subTotal" class="product-subtotal">
+                      <h5>Total Amount: Rs.<%=offerTotal %></h5>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+   
+
+<script>
+ $('#checkout-form').submit((e)=>{
+     e.preventDefault()
+    
+     $.ajax({
+         url:'/placeOrder',
+         data:$('#checkout-form').serialize(),
+         method:'post',
+         success:(response)=>{
+            if(response.codStatus){
+             location.href='/success'
+            }
+         }
+         
+     })
+})
+function deleteAddress(addId){
+  event.preventDefault()
+  $.ajax({
+    url:'/delete-address/'+addId,
+    method:'delete',
+    success:(response)=>{
+      if(response.status){
+        location.reload()
+      }
+    }
+  })
+}
+
+</script> --> 
+
+<!-- //pagination
+
+<% for(let i=0;i<pages;i++) { %>
+  <li class="page-item"><a class="page-link bg-secondary" href="/shop?page=<%=i+1%>"><%=i+1%></a></li>
+<% } %> -->

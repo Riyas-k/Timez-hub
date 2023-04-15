@@ -1,0 +1,246 @@
+<section class="mx-auto">
+  <main class="main">
+ 
+  <div class="container">
+    <div class="row my-5">
+      <div class="col-lg-10 m-auto">
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-8">
+            <div
+              class="login_wrap widget-taber-content p-30 background-white border-radius-5"
+            >
+              <div class="padding_eight_all bg-white">
+                <div class="heading_s1">
+                  <h3 class="mb-30 text-center">Create an Account</h3>
+                </div>
+            <% if(emailStatus==false){ %>
+              <p class="text-center text-danger">Email Already Exist</p>
+            <% } %> 
+                <form action="/signup" method="post">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      required=""
+                      name="name"
+                      id="name"
+                      placeholder="Username" onkeyup="validateName()"
+                    />
+                    <span id="name-error" class="validation-label"></span>
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="email"
+                      required=""
+                      name="email"
+                      id="email"
+                      placeholder="Email" onkeyup="validateEmail()"
+                    />
+                    <span id="email-error" class="validation-label"></span>
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="number"
+                      required=""
+                      name="number"
+                      id="phone"
+                      placeholder="Phone Number" onkeyup="validatePhone()"
+                    />
+                    <span id="phone-error" class="validation-label"></span>
+                  </div>
+                  <div class="form-group">
+                    <input
+                      required=""
+                      type="password"
+                      name="password"
+                      id="password"
+                      placeholder="Password" onkeyup="validatePassword()"
+                    />
+                  
+                  </div>
+                  <div class="form-group">
+                    <input
+                      required=""
+                      type="password"
+                      name="password2"
+                      id="password2"
+                      placeholder="Confirm password" onkeyup="validatePassword()"
+                    />
+                    <span id="pass-error" class="validation-label"></span>
+                  </div>
+             
+                  <div class="form-group d-flex justify-content-center">
+                    <button
+                      type="submit"
+                      class="btn btn-fill-out btn-block hover-up bg-dark"
+                      name="login" onclick="return validateForm()"
+                    >
+                      Submit &amp; Register
+                    </button>
+                  </div>
+                </form>
+                <div class="text-muted text-center">
+                  Already have an account ? <a href="/login">Log In</a >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+
+
+<script>
+
+  var nameError = document.getElementById("name-error");
+  var emailError = document.getElementById("email-error");
+  var phoneError = document.getElementById("phone-error");
+  let passError=document.getElementById("pass-error");
+  
+  
+  
+  function validateName() {
+    var name = document.getElementById("name").value;
+    var nameInput = document.getElementById("name");
+  
+    if (name.length == 0) {
+      nameError.innerHTML = "Name is required";
+      nameError.style.color = "red";
+      nameInput.style.border = "solid 2px red";
+      return false;
+    }
+    if (!name.match(/^[A-Za-z]{3,}$/)) {
+      nameError.innerHTML = "Write valid name";
+      nameError.style.color = "red";
+      nameInput.style.border = "solid 2px red";
+  
+      return false;
+    }
+    nameError.innerHTML = "";
+    // nameError.innerHTML = "Valid Name";
+    nameError.style.color = "green";
+    nameInput.style.border = "solid 2px green";
+  
+    return true;
+  }
+  function validateEmail() {
+    var email = document.getElementById("email").value;
+    var emailInput = document.getElementById("email");
+  
+    if (email.length == 0) {
+      emailError.innerHTML = "Email is required";
+      emailError.style.color = "red";
+      emailInput.style.border = "solid 2px red";
+  
+      return false;
+    }
+    if (!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+      emailError.innerHTML = "Email invalid";
+      emailError.style.color = "red";
+      emailInput.style.border = "solid 2px red";
+  
+      return false;
+    }
+    emailError.innerHTML = "";
+    emailError.style.color = "green";
+    emailInput.style.border = "solid 2px green";
+    return true;
+  }
+  function validatePhone(){
+    var phone = document.getElementById("phone").value;
+    var phoneInput = document.getElementById("phone");
+  
+    if (phone.length == 0) {
+      phoneError.innerHTML = "phone number is required";
+      phoneError.style.color = "red";
+      phoneInput.style.border = "solid 2px red";
+      return false;
+    }
+    if (!phone.match(/^\d{10}$/)) {
+      phoneError.innerHTML = "Enter valid number";
+      phoneError.style.color = "red";
+      phoneInput.style.border = "solid 2px red";
+  
+  return false;
+    }
+    phoneError.innerHTML = "";
+    phoneError.style.color = "green";
+    phoneInput.style.border = "solid 2px green";
+    return true;
+  
+  }
+  function validatePassword(){
+      
+  let password = document.getElementById("password").value;
+  let passwordInput = document.getElementById("password")
+  let cnfrmPassword = document.getElementById("password2").value;
+  let cnfrmPasswordInput= document.getElementById("password2")
+  
+      if(password.length != 0){
+          if(password == cnfrmPassword){
+              passError.innerHTML = "Passwords match";
+              passError.style.color = "green";
+              passwordInput.style.border = "solid 2px green";
+              cnfrmPasswordInput.style.border = "solid 2px green";
+              return true
+          }
+          else if (!password.match(/[a-zA-Z]/)) {
+            passError.innerHTML = "Password must contain atleast 1 letter";
+            passError.style.color = "red";
+            passwordInput.style.border = "solid 2px red";
+            return false;
+          }
+          else if (!password.match(/^.{8,}$/)) {
+            passError.innerHTML = "Password min-length 8";
+            passError.style.color = "red";
+            passwordInput.style.border = "solid 2px red";
+            return false;
+          }
+          else if (!password.match(/^(?=.*[\W_])[\w\W]/)) {
+            passError.innerHTML = "Password must contain atleast one special character";
+            passError.style.color = "red";
+            passwordInput.style.border = "solid 2px red";
+            return false;
+          }
+          else{
+              passError.innerHTML = "Password don't match";
+              passError.style.color = "red";
+              passwordInput.style.border = "solid 2px red";
+              return false
+  
+  
+          }
+      }
+      else{
+          
+          message.textContent = "";
+      }
+  }
+  function validateForm() {
+    if (
+      !validateName() ||
+      !validateEmail()
+      
+    ) {
+      submitError.style.display = "block";
+      submitError.innerHTML = "Please fix all errors to submit.";
+      setTimeout(function () {
+        submitError.style.display = "none";
+      }, 3000);
+      return false;
+    }
+  }
+  
+    setTimeout(function() {
+      document.querySelector('.message').style.display = 'none';
+    }, 3000);
+  </script>
+  
+  
+  
+  
+  
+  

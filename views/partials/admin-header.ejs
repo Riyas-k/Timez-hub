@@ -1,0 +1,40 @@
+<% if(locals.admins) { %>
+<header class="main-header navbar main-wrap">
+  <div class="col-search">
+    <form class="searchform">
+    
+      <datalist id="search_terms">
+        <option value="Products"></option>
+        <option value="New orders"></option>
+        <option value="Apple iphone"></option>
+        <option value="Ahmed Hassan"></option>
+      </datalist>
+    </form>
+  </div>
+  <div class="col-nav">
+    <button
+      class="btn btn-icon btn-mobile me-auto"
+      data-trigger="#offcanvas_aside"
+    >
+      <i class="material-icons md-apps"></i>
+    </button>
+  
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle"  style="background-color:  #000000;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+  
+        Super Admin
+        
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <% if(locals.admins) { %>
+       <a class="dropdown-item" href="/admin/adminLogout"> log out</a></li>
+       <%} else { %>
+        <a class="dropdown-item" href="/admin/adminLogout"> log In</a></li>
+      <% } %>
+      <!-- <li><a class="dropdown-item" href="/admin/adminLogin"> log in</a></li> -->
+     
+    </ul>
+    </div>
+  </div>
+</header>
+<% } %>

@@ -1,0 +1,389 @@
+<% if(cartItems.length===0){ %>
+  <div class="container-fluid  mt-100">
+  
+       
+       
+         
+    <div class="card-body cart">
+        <div class="col-sm-12 empty-cart-cls text-center">
+          <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+          <h3><strong>Nothing to show</strong></h3>
+          <br>
+          <h4>No Cart products:)</h4>
+          <a href="/shop" class="btn btn-primary cart-btn-transform m-3" data-abc="true">continue shopping</a>
+          
+        
+        </div>
+    </div>
+</div> 
+    
+  
+  </div>
+ 
+ </div>
+
+</div>
+
+
+<style>
+ 
+ @import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
+
+body {
+ background-color: #eee;
+ font-family: 'Calibri', sans-serif !important;
+}
+
+.mt-100{
+margin-top:100px;
+
+}
+
+
+.card {
+ margin-bottom: 30px;
+ border: 0;
+ -webkit-transition: all .3s ease;
+ transition: all .3s ease;
+ letter-spacing: .5px;
+ border-radius: 8px;
+ -webkit-box-shadow: 1px 5px 24px 0 rgba(68,102,242,.05);
+ box-shadow: 1px 5px 24px 0 rgba(68,102,242,.05);
+}
+
+.card .card-header {
+ background-color: #fff;
+ border-bottom: none;
+ padding: 24px;
+ border-bottom: 1px solid #f6f7fb;
+ border-top-left-radius: 8px;
+ border-top-right-radius: 8px;
+}
+
+.card-header:first-child {
+ border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+}
+
+
+
+.card .card-body {
+ padding: 30px;
+ background-color: transparent;
+}
+
+.btn-primary, .btn-primary.disabled, .btn-primary:disabled {
+ background-color: #4466f2!important;
+ border-color: #4466f2!important;
+}
+</style>
+<% }else { %>
+
+
+<section class="main-wrap">
+  <div class="container">
+    <div class="row my-5">
+      <div class="col-12">
+        <div class="table-responsive">
+          <table class="table shopping-summery text-center clean">
+            <thead>
+              <tr class="main-heading">
+                <th scope="col">No</th>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Offer Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Sub Total</th>
+                <th scope="col">Remove</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% cartItems.forEach(function(cart,index){ %>
+                <tr>
+                  <td>
+                    <%=index+1%>
+                  </td>
+                  <td class="image product-thumbnail">
+                    <a href="/fullImage/<%=cart.item%>"><img src="/images/<%=cart.carted.Image[0]%>" alt="#"
+                        class="img-fluid" /></a>
+                  </td>
+                  <td class="product-des product-name">
+                    <a href="/fullImage/<%=cart.item%>">
+                    <h5 class="product-name">
+                      <%=cart.carted.ProductName%>
+                    </h5>
+                    </a>
+                    <p class="font-xs"></p>
+                  </td>
+                  <td class="price" data-title="Price">
+                    <span>₹ <%=cart.carted.OfferPrice%></span>
+                  </td>
+                  
+                  <td class="text-center" data-title="Stock">
+                    <button class="ml-5 btn btn-sm bg-dark" style="width: 40px; height: 40px"
+                      onclick="(changeQuantity('<%=cart._id%>','<%=cart.item%>','<%=user.id%>',-1))">
+                      -
+                    </button>
+
+                    <span id="<%= cart.item %>" class="m-1">
+                      <%=cart.quantity%>
+                    </span>
+                    <% if(cart.carted.Quantity>cart.quantity){ %>
+                    <button class="mr-5 btn btn-sm bg-dark" style="width: 40px; height: 40px"
+                    onclick="changeQuantity('<%=cart._id%>','<%=cart.item%>','<%=user.id%>',1)">
+                    +
+                  </button>
+                  <% } %>
+                  <%if(cart.carted.Quantity==cart.quantity){ %>
+                    <p class="text-danger">Stock limit Reached</p>
+                  <% } %>
+                </td> 
+                <td class="price" data-title="Price">
+                 
+                    <span>₹ <strong id="subTotal<%=cart.item%>"><%=cart.carted.OfferPrice * cart.quantity%></strong></span>
+                </td>
+                
+                  <td class="action" data-title="Remove">
+                    <button onclick="removeProduct('<%=cart.item%>','<%=user.id%>','<%=cart.carted.ProductName%>')" ; class="btn btn-danger  bg-dark btn-sm">
+                      <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                  </td>
+                </tr>
+                <% }) %>`
+            </tbody>
+          </table>
+        </div>
+        <div class="cartItems-actions">
+          <div class="divider center_icon my-5">
+            <i class="fi-rs-fingerprint"></i>
+          </div>
+          <div class="row mb-5">
+        
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <div class="heading_s1 mb-3">
+                    <h4>Apply Coupon</h4>
+                  </div>
+                  <div class="total-amount">
+                    <div class="left">
+                      <div class="coupon">
+                        <form id="coupon" >
+                            <div class="form-row row justify-content-center">
+                                <div class="form-group col-lg-9">
+                                    <input id="code" class="font-medium" name="Coupon" placeholder="Enter Your Coupon">
+                                </div>
+                                <div class="form-group col-lg-3">
+                                  <button type="button" class="btn  btn-sm bg-dark"
+                                  onclick="validateCoupon()"><i
+                                      class="fi-rs-label mr-10"></i>Apply</button>
+      
+      
+                                </div>
+                                <h6 id="successMesage" class="text-success"></h6>
+                                <h6 id="couponUsedErr" class="message" style="color: red;"></h6>
+                            </div>
+                        </form>
+                        <span class="couponErr"></span>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+             
+            </div>
+            <div class="col-lg-4 col-md-12 mx-auto mr-5f">
+              <div class="border p-md-4 p-30 border-radius cartItems-totals">
+                <div class="heading_s1 mb-3">
+                  <!-- <h5>Total Price- <span>₹ <s id="total"><%=total%></s></span></h5> -->
+                </div>
+                
+                <div class="table-responsive">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <th><h5>OFFER-PRICE</h5></th>
+                      </tr>
+                    
+                      <!-- <tr> -->
+                        <!-- <td class="cartItems_total_label">Total</td> -->
+                        <!-- <td class="cartItems_total_amount">
+
+                        </td> -->
+                      <!-- </tr> -->
+                      <td class="cartItems_total_amount">
+                        <strong
+                          >₹<span id="OffTotal" class="font-xl fw-900 text-brand "><%=offerTotal%></span
+                          ></strong
+                        >
+                      </td>
+                      <tr>
+                        <td class="cartItems_total_label">Discount Amount <i class="fa-sharp fa-solid fa-gift"></td>
+                        <td class="cartItems_total_amount">₹<span id="discountAmount">0</span></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                  <form class="form-sample" action="/cart" method="POST">
+                    <input type="hidden" name="total" id="checkTotal" value="">
+                    <input type="hidden" name="coupon" id="couponName" value="">
+                    <input type="hidden" name="discountAmount" id="couponDiscountAmount" value="">
+                    <% if(locals.cartItems[0].carted.Quantity>0){ %>
+                      <button type="submit" class="btn bg-dark"><i class="fi-rs-box-alt mr-10"></i> Place Order</button>
+                       
+                    <% }else{%>
+                      <p class="text-danger">out-of-stock</p>
+                    <% } %>
+                </form>
+                </div>
+              
+              
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% } %>
+
+<script>
+  function validateCoupon(event){  
+     couponName = document.getElementById('code').value;
+     $.ajax({
+       url:'/validate-coupon?coupon='+couponName,
+       method:'post',
+       success:(response)=>{
+        // console.log(response);
+         if(response.discountAmount && response.couponTotal){
+           document.getElementById('discountAmount').innerHTML = "-" + (response?.discountAmount)
+           document.getElementById('OffTotal').innerHTML = response?.couponTotal
+           document.getElementById('successMesage').innerHTML = response?.success
+         }
+         const checkTotalInput = document.getElementById('checkTotal');
+         const couponNameInput = document.getElementById('couponName');
+         const couponDiscountInput =document.getElementById('couponDiscountAmount') 
+         checkTotalInput.value = response?.couponTotal,
+         couponNameInput.value = couponName,
+         couponDiscountInput.value = response?.discountAmount
+         console.log(couponDiscountInput,';;');
+         if(response.err){
+           document.getElementById('couponUsedErr').innerHTML = response.err
+         } 
+       }
+     })
+  }
+ </script>
+
+<script>
+  function changeQuantity(cartId, proId, userId, count) {
+    // console.log(cartId,proId,userId,count);
+    let Quantity = parseInt(document.getElementById(proId).innerHTML);
+    
+    count = parseInt(count)
+    if (Quantity + count == 0) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+          $.ajax({
+            url: '/change-quantity',
+            data: {
+              cart: cartId,
+              product: proId,
+              count: count,
+              user: userId,
+              Quantity: Quantity
+            },
+
+            method: 'put',
+            success: (response) => {
+              // console.log(response,' ===');
+              if (response.removeProduct) {
+                location.reload()
+              } else {
+                location.reload()
+                document.getElementById(proId).innerHTML = (Quantity + count)
+                document.getElementById('OffTotal').innerHTML = response.offerTotal;
+                document.getElementById('total').innerHTML = response.total;
+                
+                // document.getElementById('subTotal'+proId).innerHTML = response.subTotal.cartItems[0].Price
+
+              }
+            }
+          })
+        }
+      })
+    } else {
+
+      $.ajax({
+        url: '/change-quantity',
+        data: {
+          cart: cartId,
+          product: proId,
+          count: count,
+          user: userId,
+          Quantity: Quantity
+        },
+
+        method: 'put',
+        success: (response) => {
+          // console.log(response);
+          if (response.removeProduct) {
+            location.reload()
+          } else {
+            // console.log(response.products.Quantity);
+            if(response.products.Quantity==Quantity+count){
+              location.reload()
+            }
+            if(response.products.Quantity==(Quantity)){
+              location.reload()
+            }
+            // console.log(response.subTotal.cartItems[0].Price);
+            location.reload()
+            document.getElementById(proId).innerHTML = (Quantity + count)
+            document.getElementById('OffTotal').innerHTML = response.offerTotal
+            document.getElementById('total').innerHTML = response.total
+            // document.getElementById('subTotal'+proId).innerHTML = response.subTotal.cartItems[0].Price
+          }
+        }
+      })
+    }
+  }
+  function removeProduct(proId,userId,ProName){
+      Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          
+          if (result.isConfirmed) {
+            $.ajax({
+    url: '/removeProduct',
+    data: {
+      product: proId,
+      user: userId
+    },
+    method: 'delete',
+    success: (response) => {
+      if (response.removeProduct) {
+        Swal.fire('Deleted!', 'Your address has been deleted.');
+                location.reload()
+              } 
+          }
+        })
+    }
+  })
+  
+  }
+
+</script>

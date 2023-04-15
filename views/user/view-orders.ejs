@@ -1,0 +1,209 @@
+<% if(orders.length===0) { %>
+  <div class="container-fluid  mt-100">
+
+    
+       
+       <div class="card-body cart">
+           <div class="col-sm-12 empty-cart-cls text-center">
+             <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+             <h3><strong>Nothing to show</strong></h3>
+             <br>
+             <h4>No Orders Shop some products:)</h4>
+             <a href="/shop" class="btn btn-primary cart-btn-transform m-3" data-abc="true">continue shopping</a>
+             
+           
+           </div>
+       </div>
+   </div> 
+       
+     
+     </div>
+    
+    </div>
+   
+   </div>
+
+
+   <style>
+    
+    @import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
+
+body {
+    background-color: #eee;
+    font-family: 'Calibri', sans-serif !important;
+}
+
+.mt-100{
+   margin-top:100px;
+
+}
+
+
+.card {
+    margin-bottom: 30px;
+    border: 0;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    letter-spacing: .5px;
+    border-radius: 8px;
+    -webkit-box-shadow: 1px 5px 24px 0 rgba(68,102,242,.05);
+    box-shadow: 1px 5px 24px 0 rgba(68,102,242,.05);
+}
+
+.card .card-header {
+    background-color: #fff;
+    border-bottom: none;
+    padding: 24px;
+    border-bottom: 1px solid #f6f7fb;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.card-header:first-child {
+    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+}
+
+
+
+.card .card-body {
+    padding: 30px;
+    background-color: transparent;
+}
+
+.btn-primary, .btn-primary.disabled, .btn-primary:disabled {
+    background-color: #4466f2!important;
+    border-color: #4466f2!important;
+}
+   </style>
+<% }else { %>
+
+
+  <div class="container text-center">
+    <div class="table-responsive justify-content-center">
+      <table class="table table-striped mb-0" id="productsTable">
+        <thead>
+          <tr class="text-center">
+            <th>Order ID</th>
+            <!-- <th>Image</th> -->
+            <!-- <th>Product Name</th> -->
+            <th>Date & Time</th>
+            <!-- <th>Quantity</th> -->
+            <th>Order Status</th>
+            <th>Option</th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+          <% orders.map((order) => { %>
+          <tr>
+            
+            <td>
+              <p class="text mb-0 small"><%=order.orders._id %></p>
+            </td>
+         
+            <td>
+              <p class="text mb-0 small"><%= order.orders.createdAt %></p>
+            </td>
+           
+            <td>
+              <p class="text mb-0 small" style="color: green;"><%= order.orders.orderStatus %></p>
+            </td>
+            <td colspan="6">
+              
+              <a href="/order-details/<%=order.orders._id%>" class="btn  bg-dark mt-25 mb-25">Order Details</a>
+            </td>
+          </tr>
+          
+          <tr>
+           
+            <% }) %>
+        
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+<% } %>
+<div class="mobile-header-active mobile-header-wrapper-style">
+  <div class="mobile-header-wrapper-inner">
+    <div class="mobile-header-top">
+      <div class="mobile-header-logo">
+
+      </div>
+      <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
+        <button class="close-style search-close">
+          <i class="icon-top"></i>
+          <i class="icon-bottom"></i>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-header-content-area">
+      <div class="mobile-search search-style-3 mobile-header-border">
+        <form action="#">
+          <input type="text" placeholder="Search for items…" />
+          <button type="submit"><i class="fi-rs-search"></i></button>
+        </form>
+      </div>
+      <div class="mobile-menu-wrap mobile-header-border">
+     
+        <!-- mobile menu start -->
+        <nav>
+          <ul class="mobile-menu">
+            <li class="menu-item-has-children">
+              <span class="menu-expand"></span><a href="/">Home</a>
+            </li>
+            <li class="menu-item-has-children">
+              <span class="menu-expand"></span><a href="/shop">Shop</a>
+            </li>
+            <li class="menu-item-has-children">
+              <span class="menu-expand"></span><a href="#">Orders</a>
+            </li>
+            <li class="menu-item-has-children">
+              <span class="menu-expand"></span><a href="blog-category-fullwidth.html">About</a>
+            </li>
+            <li class="menu-item-has-children">
+              <span class="menu-expand"></span><a href="blog-category-fullwidth.html">Contact</a>
+            </li>
+
+            <!-- <li class="menu-item-has-children">
+                <span class="menu-expand"></span><a href="#">Language</a>
+                <ul class="dropdown">
+                  <li><a href="#">English</a></li>
+                  <li><a href="#">French</a></li>
+                  <li><a href="#">German</a></li>
+                  <li><a href="#">Spanish</a></li>
+                </ul>
+              </li> -->
+          </ul>
+        </nav>
+        <!-- mobile menu end -->
+      </div>
+   
+    </div>
+
+  </div>
+ </div>
+</div>
+<script>
+  function cancelOrder(proId){
+      $.ajax({
+          url:'/cancel-order/'+proId,
+          method:'get',
+          success:(response=>{
+              if(response.status){
+                  location.reload()
+              }
+          })
+      })
+  }
+  function deleteOrder(proId){
+      $.ajax({
+          url:"/deleteOrder/"+proId,
+          method:'delete',
+          success:(response=>{
+            if(response.status){
+              location.reload()
+            }
+          })
+      })
+  }
+</script>

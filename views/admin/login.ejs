@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card my-5">
+        <form
+          class="card-body cardbody-color p-lg-5"
+          action="/admin/adminLogin"
+          method="post"
+        >
+          <div class="text-center">
+            <img
+              src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+              class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
+              width="200px"
+              alt="profile"
+            />
+            <h1>Admin Panel</h1>
+            <% if(loginErr) { %>
+            <p style="color: red"><%=loginErr%></p>
+            <% } %>
+          </div>
+
+          <div class="mb-3">
+            <input
+              type="email"
+              class="form-control"
+              id="Username"
+              name="email"
+              aria-describedby="emailHelp"
+              placeholder="Email"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              type="password"
+              name="password"
+              class="form-control"
+              id="password"
+              placeholder="password"
+            />
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary px-5 mb-5 w-100 bg-dark">
+              Login
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

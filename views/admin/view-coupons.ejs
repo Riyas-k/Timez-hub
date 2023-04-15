@@ -1,0 +1,77 @@
+<section class="main-wrap">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-12">
+        <div class="card mt-2">
+          <div class="card-header">
+            <h3 class="text-center">Coupon Management</h3>
+          </div>
+          <div class="card-body px-0 pt-0 pb-2">
+            <% if(coupon.length==0){%>
+            <div class="d-flex justify-content-center">
+              <img src="/assets/imgs/banners/empty-cart-1546860808" alt="" />
+            </div>
+            <%} else{%>
+            <div class="table-responsive">
+              <table class="table table-striped table-hover align-middle">
+                <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Coupon Code</th>
+                    <th scope="col">Discount Percent</th>
+                    <th scope="col">Max Discount</th>
+                    <th scope="col">Expiry</th>
+                    <th scope="col">Options</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% coupon.forEach((element,index)=>{ %>
+                  <tr>
+                    <td><%= index+1 %></td>
+                    <td>
+                      <div class="d-flex flex-column">
+                        <h6 class="mb-0"><%= element.couponName %></h6>
+                        <p class="text-muted mb-0"><%= element.description?.slice(0,40)+'...' %></p>
+                      </div>
+                    </td>
+                    <td><%= element.discountPercentage%> %</td>
+                    <td>₹ <%= element.maxDiscountValue%></td>
+                    <td><%=coupon.expiry%></td>
+                    <td>
+                      <button class="btn btn-danger" onclick="deleteCoupon('<%= element._id%>');Swal.fire({
+                          position: 'center',
+                          icon: 'success',
+                          title: 'Coupon Deleted Successfully',
+                          showConfirmButton: false,
+                          timer: 2000
+                        })">
+                        <i class="far fa-trash-alt"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <%})%>
+                </tbody>
+              </table>
+            </div>
+            <%}%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function deleteCoupon(couponId) {
+    $.ajax({
+      url: "/admin/delete-coupon",
+      data: { couponId },
+      method: "delete",
+      success: (response) => {
+        if (response.status) {
+          location.reload();
+        }
+      },
+    });
+  }
+</script>

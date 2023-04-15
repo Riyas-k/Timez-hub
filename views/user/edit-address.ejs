@@ -1,0 +1,100 @@
+<section class="mt-50 mb-50 text-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="mb-25">
+          <h4>Edit Address</h4>
+        </div>
+        <form
+          action="/edit-address/<%=newAddress.Address._id%>"
+          method="post"
+          id="address-form"
+        >
+          <div class="form-group">
+            <input
+              type="text"
+              required=""
+              name="fname"
+              value="<%=newAddress.Address.fname%>"
+              placeholder="First name *"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              required=""
+              name="lname"
+              value="<%=newAddress.Address.lname%>"
+              placeholder="Last name *"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              required=""
+              type="text"
+              name="street"
+              value="<%=newAddress.Address.street%>"
+              placeholder="Street Name"
+            />
+          </div>
+
+          <div class="form-group">
+            <input
+              type="text"
+              name="apartment"
+              required=""
+              value="<%=newAddress.Address.apartment%>"
+              placeholder="Apartment *"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              name="city"
+              required=""
+              placeholder="City"
+              value="<%=newAddress.Address.city%>"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              required=""
+              type="text"
+              name="state"
+              placeholder="State"
+              value="<%=newAddress.Address.state%>"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              required=""
+              type="text"
+              name="pincode"
+              placeholder="Pincode"
+              value="<%=newAddress.Address.pincode%>"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              required=""
+              type="text"
+              name="mobile"
+              placeholder="Mobile"
+              value="<%=newAddress.Address.mobile%>"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              required=""
+              type="text"
+              name="email"
+              placeholder="email"
+              value="<%=newAddress.Address.email%>"
+            />
+          </div>
+          <button type="submit" class="btn btn-dark">Save Changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

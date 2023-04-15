@@ -1,0 +1,288 @@
+<main class="main-wrap">
+  <section class="content-main">
+    <div class="content-header">
+      <div>
+        <h2 class="content-title card-title">Dashboard</h2>
+        <!-- <p>Whole data about your business here</p> -->
+      </div>
+      <div>
+        <a href="/admin/sales-report" class="btn btn-primary bg-dark"
+          ><i class="text-muted material-icons md-post_add "></i>Create report</a
+        >
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="card card-body mb-4">
+          <article class="icontext">
+            <span class="icon icon-sm rounded-circle bg-primary-light"
+              ><i class="text-primary material-icons md-monetization_on"></i
+            ></span>
+            <div class="text">
+              <h6 class="mb-1 card-title">Revenue</h6>
+              <span>₹<%=response%></span>
+              <!-- <span class="text-sm"> Shipping fees are not included </span> -->
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="card card-body mb-4">
+          <article class="icontext">
+            <span class="icon icon-sm rounded-circle bg-success-light"
+              ><i class="text-success material-icons md-local_shipping"></i
+            ></span>
+            <div class="text">
+              <h6 class="mb-1 card-title">Orders</h6>
+              <span><%=ordersLength%></span>
+              <!-- <span class="text-sm"> Excluding orders in transit </span> -->
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="card card-body mb-4">
+          <article class="icontext">
+            <span class="icon icon-sm rounded-circle bg-warning-light"
+              ><i class="text-warning material-icons md-qr_code"></i
+            ></span>
+            <div class="text">
+              <h6 class="mb-1 card-title">Total Products</h6>
+              <span><%=productsLength%></span>
+              <!-- <span class="text-sm"> In 19 Categories </span> -->
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="card card-body mb-4">
+          <article class="icontext">
+            <span class="icon icon-sm rounded-circle bg-info-light"
+              ><i class="text-info material-icons md-shopping_basket"></i
+            ></span>
+            <div class="text">
+              <h6 class="mb-1 card-title">Total Users</h6>
+              <span><%=usersLength%></span>
+              <!-- <span class="text-sm"> Based in your local time. </span> -->
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-8 col-lg-12">
+        <div class="card mb-4">
+          <article class="card-body">
+            <h5 class="card-title">Sale statistics</h5>
+            <canvas id="barChart" height="120px"></canvas>
+            <p style="visibility: hidden;" id="ordersPerDay"><%=JSON.stringify(locals.ordersPerDay)%></p>
+          </article>
+        </div>
+      </div>
+      
+      <div class="col-xl-4 col-lg-12">
+        <div class="card mb-4">
+          <article class="card-body">
+            <h5 class="card-title">Types of Orders</h5>
+            
+             <canvas id="Chart"></canvas>
+             <p id="payment" hidden><%=JSON.stringify(locals.payment)%></p>
+             </div>
+            </article> 
+          </div>
+          <div class="card mb-4">
+            <article class="card-body">
+              <h5 class="card-title">User Growth</h5>
+              <canvas id="barChart2" height="120px"></canvas>
+              <p style="visibility: hidden;" id="usersPerDay"><%=JSON.stringify(locals.usersPerDay)%></p>
+            </article>
+          </div>
+</section>
+           
+        <!-- <div class="card mb-4">
+          <article class="card-body">
+            <h5 class="card-title">Marketing Chanel</h5>
+            <span class="text-muted font-xs">Facebook</span>
+            <div class="progress mb-3">
+              <div class="progress-bar" role="progressbar" style="width: 15%">
+                15%
+              </div>
+            </div>
+            <span class="text-muted font-xs">Instagram</span>
+            <div class="progress mb-3">
+              <div class="progress-bar" role="progressbar" style="width: 65%">
+                65%
+              </div>
+            </div>
+            <span class="text-muted font-xs">Google</span>
+            <div class="progress mb-3">
+              <div class="progress-bar" role="progressbar" style="width: 51%">
+                51%
+              </div>
+            </div>
+            <span class="text-muted font-xs">Twitter</span>
+            <div class="progress mb-3">
+              <div class="progress-bar" role="progressbar" style="width: 80%">
+                80%
+              </div>
+            </div>
+            <span class="text-muted font-xs">Other</span>
+            <div class="progress mb-3">
+              <div class="progress-bar" role="progressbar" style="width: 80%">
+                80%
+              </div>
+            </div>
+          </article>
+        </div> -->
+      </div>
+    </div>
+    
+  </section>
+  <!-- content-main end// -->
+  <footer class="main-footer font-xs">
+    <div class="row pb-30 pt-15">
+      <div class="col-sm-6">
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        © Times Hub.
+      </div>
+    
+    </div>
+  </footer>
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  
+  const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'top',
+    },
+  },
+  elements: {
+    arc: {
+      borderWidth: 0
+    }
+  },
+  layout: {
+    padding: 10
+  },
+  radius: '60%' // set the radius to 60%
+};
+
+let newData = [];
+var xValue = ['COD','Razorpay'];
+let datas = JSON.parse(document.getElementById('payment').innerHTML)
+console.log(datas,'jj');
+
+newData.push(datas[0])
+newData.push(datas[1])
+// newData.push(1)
+
+// console.log(newData,'data');
+
+
+const data = {
+  labels:xValue,
+  datasets: [{
+    data:newData,
+    backgroundColor: [
+      '#DD1C1A',
+      '#0F7173',
+      '#FBAF00'
+    ],
+    hoverOffset: 4
+  }]
+};
+const config = {
+  type: 'doughnut',
+  data: data,
+};
+const ctx = document.getElementById('Chart').getContext('2d');
+const myChart = new Chart(ctx, {
+  type: 'pie',
+  data: data,
+  options: options
+});
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+ var xValues = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  var yValues = [0, 5, 10, 15, 20, 25, 50];
+  let ordersPerDayData = JSON.parse(document.getElementById('ordersPerDay').innerHTML)
+  let buyed=[];
+
+  for(let i=0;i<xValues.length;i++){
+    if(xValues[i]in ordersPerDayData){
+      buyed.push(ordersPerDayData[xValues[i]])
+    }else{
+      buyed.push(0)
+    }
+  }
+  // Create a new Chart object
+  var ctx1 = document.getElementById('barChart').getContext('2d');
+  var myChart1 =   new Chart('barChart', {
+    type: 'bar',
+    data: {
+      labels: xValues,
+      datasets: [
+        {
+          fill: false,
+          lineTension: 0,
+          backgroundColor: 'yellow',
+          borderColor: 'rgba(0,0,255,0.1)',
+          data: buyed,
+          label: 'Sales',
+        },
+      ],
+    },
+    options: {
+      legend: { display: false },
+      scales: {
+        yAxes: [{ ticks: { min: 0, max: 25 } }],
+      },
+    },
+  });
+  let userPerDayData = JSON.parse(document.getElementById('usersPerDay').innerHTML)
+  let users = [];
+  for(let i=0;i<xValues.length;i++){
+    if(xValues[i]in userPerDayData){
+      users.push(userPerDayData[xValues[i]])
+    }else{
+      users.push(0)
+    }
+  }
+
+  var ctx1 = document.getElementById('barChart2').getContext('2d');
+
+  var myChart2 =   new Chart('barChart2', {
+    type: 'line',
+    data: {
+      labels: xValues,
+      datasets: [
+        {
+          fill: false,
+          lineTension: 0,
+          backgroundColor: 'red',
+          borderColor: '#9E0031',
+          data: users,
+          label: 'users',
+        },
+      ],
+    },
+    options: {
+      legend: { display: false },
+      scales: {
+        yAxes: [{ ticks: { min: 0, max: 25 } }],
+      },
+    },
+  });
+</script>

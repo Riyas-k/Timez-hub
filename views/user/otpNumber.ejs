@@ -1,0 +1,31 @@
+<section class="main-wrap">
+  <div class="container">
+    <div
+      class="row text-center p-5"
+      style="background-color: rgb(255, 255, 255)"
+    >
+      <form action="/otpNumber" method="post">
+        <div class="form-group">
+          <label for="exampleInputEmail1" class="text-dark display-6"
+            >Enter Number</label
+          >
+          <% if(locals.userExist) {%>
+          <p style="color: red">Number Not Exist</p>
+          <% } %>
+          <input
+            type="number"
+            placeholder="Enter Your Number here"
+            name="number"
+            class="form-control bg-white text-center"
+            id="number"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Get Otp</button>
+      </form>
+      <small class="mt-5 text-dark">
+        back to Login
+        <a href="/login" class="text-decoration-none">Login</a>
+      </small>
+    </div>
+  </div>
+</section>

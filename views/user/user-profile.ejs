@@ -1,0 +1,236 @@
+<div class="screen-overlay"></div>
+<main class="main-wrap">
+  <section class="content-main">
+    <div class="content-header">
+      <h3 style="text-align: center; padding: 3rem">Profile settings</h3>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row gx-5">
+          <aside class="col-lg-3 border-end">
+            <nav class="nav bg-light text-light flex-lg-column mb-4">
+              <a class="nav-link active" aria-current="page" href="#"
+                >General</a
+              >
+            </nav>
+            <nav class="nav bg-light text-light flex-lg-column mb-4">
+              <a class="nav-link active" aria-current="page" href="/wallet"
+                >Wallet</a
+              >
+            </nav>
+            <nav class="nav bg-light text-light flex-lg-column mb-4">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/view-address"
+                >Address</a
+              >
+            </nav>
+            <nav class="nav bg-light text-light flex-lg-column mb-4">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/add-new-address"
+                >Add Address</a
+              >
+            </nav>
+            <nav>
+              <a href="/reset-password">
+                <button class="btn btn-primary bg-dark">Reset Password</button></a
+              >
+            </nav>
+          </aside>
+
+          <div class="col-lg-9">
+            <!-- content-body .// -->
+            <section class="content-body p-xl-4">
+              <div class="container">
+                <form id="profile">
+                  <div class="row justify-content-center align-items-center">
+                    <div class="col-lg-3 col-md-4 border-right text-center">
+                      <div class="p-3 py-5">
+                        <img
+                          class="rounded-circle"
+                          width="150px"
+                          src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                        />
+                        <span class="font-weight-bold d-block mt-1"
+                          ><%=data.Name%></span
+                        >
+                      </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8">
+                      <div class="row gx-3">
+                        <div class="col-12 mb-3">
+                          <label class="form-label">User Name</label>
+                          <input
+                            class="form-control"
+                            name="fname"
+                            id="name"
+                            type="text"
+                            value="<%=data.Name%>"
+                            required=""
+                            value="data.username"
+                            onkeyup="validateName()"
+                          />
+                          <span id="name-error" class="validation-label"></span>
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                          <label class="form-label">Email</label>
+                          <input
+                            class="form-control"
+                            name="email"
+                            id="email"
+                            type="email"
+                            value="<%=data.Email%>"
+                            onkeyup="validateEmail()"
+                            required
+                          />
+                          <span
+                            id="email-error"
+                            class="validation-label"
+                          ></span>
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                          <label class="form-label">Phone</label>
+                          <input
+                            class="form-control"
+                            name="phone"
+                            type="number"
+                            value="<%=data.PhoneNo%>"
+                            id="phone"
+                            onkeyup="validatePhone()"
+                            required="  "
+                          />
+                          <span
+                            id="phone-error"
+                            class="validation-label"
+                          ></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row justify-content-center">
+                    <div class="col-lg-6 col-md-8 col-sm-10 text-center">
+                      <button
+                        class="btn btn-primary bg-dark"
+                        onclick="if(validate()==true){changeProfile('<%=data._id%>')};Swal.fire({
+                          position: 'center',
+                          icon: 'success',
+                          title: 'Changes Saved',
+                          showConfirmButton: true,
+                          timer: 200000
+                        })"
+                      >
+                        Save changes
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </section>
+
+            <!-- content-body .// -->
+          </div>
+          <!-- col.// -->
+        </div>
+        <!-- row.// -->
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function changeProfile(profileId) {
+      $("#profile").submit((e) => {
+        e.preventDefault();
+        $.ajax({
+          url: `/profile/${profileId}`,
+          method: "PUT",
+          data: $("#profile").serialize(),
+          success: (response) => {
+            location.reload();
+          },
+        });
+      });
+    }
+  </script>
+  <script>
+    var nameError = document.getElementById("name-error");
+    var emailError = document.getElementById("email-error");
+    var phoneError = document.getElementById("phone-error");
+    function validateName() {
+      console.log(">>>>>>>>>>");
+      var name = document.getElementById("name").value;
+      var nameInput = document.getElementById("name");
+      if (name.length == 0) {
+        nameError.innerHTML = "Name is required";
+        nameError.style.color = "red";
+        nameInput.style.border = "solid 2px red";
+        return false;
+      }
+      if (!name.match(/^[A-Z a-z]{3,}$/)) {
+        nameError.innerHTML = "Write valid name";
+        nameError.style.color = "red";
+        nameInput.style.border = "solid 2px red";
+        return false;
+      }
+      nameError.innerHTML = "";
+      // nameError.innerHTML = "Valid Name";
+      nameError.style.color = "green";
+      nameInput.style.border = "solid 2px green";
+      return true;
+    }
+    function validateEmail() {
+      var email = document.getElementById("email").value;
+      var emailInput = document.getElementById("email");
+      if (email.length == 0) {
+        emailError.innerHTML = "Email is required";
+        emailError.style.color = "red";
+        emailInput.style.border = "solid 2px red";
+        return false;
+      }
+      if (!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+        emailError.innerHTML = "Email invalid";
+        emailError.style.color = "red";
+        emailInput.style.border = "solid 2px red";
+        return false;
+      }
+      emailError.innerHTML = "";
+      emailError.style.color = "green";
+      emailInput.style.border = "solid 2px green";
+      return true;
+    }
+    function validatePhone() {
+      var phone = document.getElementById("phone").value;
+      var phoneInput = document.getElementById("phone");
+      if (phone.length == 0) {
+        phoneError.innerHTML = "phone number is required";
+        phoneError.style.color = "red";
+        phoneInput.style.border = "solid 2px red";
+        return false;
+      }
+      if (!phone.match(/^\d{10}$/)) {
+        phoneError.innerHTML = "Enter valid number";
+        phoneError.style.color = "red";
+        phoneInput.style.border = "solid 2px red";
+        return false;
+      }
+      phoneError.innerHTML = "";
+      phoneError.style.color = "green";
+      phoneInput.style.border = "solid 2px green";
+      return true;
+    }
+    function validate() {
+      if (!validateName() || !validateEmail() || !validatePhone()) {
+        Swal.fire({
+          icon: "error",
+          title: "Enter details correctly!!",
+        });
+        return false;
+      } else {
+        return true;
+      }
+    }
+  </script>
+</main>

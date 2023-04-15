@@ -1,0 +1,200 @@
+<section class="main-wrap d-flex align-items-center justify-content-center">
+  <div class="col-12 grid-margin">
+    <div class="card text-center mx-auto">
+      <div class="card-body">
+        <h2 class="card-title pb-3">Add new coupon</h2>
+        <form class="form-sample">
+          <div class="alert alert-danger" id="errorDisplay" role="alert" hidden></div>
+          <div class="row justify-content-center">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Coupon Code</label>
+                <div class="col-sm-9">
+                  <div class="input-group">
+                    <input type="text" id="couponName" value="" class="form-control" placeholder="Generate Coupon Code" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <a class="btn btn-outline-info" onclick="generateCoupon()">Generate Code</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Validity</label>
+                <div class="col-sm-9">
+                  <input type="date" name="" class="form-control" id="validity">
+                </div>
+              </div>
+            </div>
+      
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Min Purchase</label>
+                <div class="col-sm-9">
+                  <input id="minAmount" type="text" class="form-control" onkeyup="validateMinAmount">
+                </div>
+              </div>
+            </div>
+      
+            <div class="col-md-6 discPer">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Discount (%)</label>
+                <div class="col-sm-9">
+                  <input id="discountPercentage" type="number" class="form-control">
+                </div>
+              </div>
+            </div>
+      
+            <div class="col-md-6" id="maxdiscountfield">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Max Discount (Rs)</label>
+                <div class="col-sm-9">
+                  <input id="maxDiscountValue" type="text" class="form-control">
+                </div>
+              </div>
+            </div>
+      
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Description (T&amp;C)</label>
+                <div class="col-sm-9">
+                  <textarea name="" class="form-control" id="description" cols="45" rows="5"></textarea>
+                </div>
+              </div>
+            </div>
+      
+            <div class="col-md-12">
+              <a type="button" class="btn btn-danger" onclick="validatorCoupen();Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Coupon Added Successfully',
+                showConfirmButton: false,
+                timer: 1500
+              })">submit</a>
+            </div>
+        </form>
+        </div>
+      </div>
+      </div>
+</section>
+
+<script>
+      function generateCoupon() {
+    $.ajax({
+      url: '/admin/generate-coupon',
+      method: 'get',
+      success: (response) => {
+        $('#couponName').val(response.couponCode);
+      }
+    });
+  }
+
+</script>
+
+  <script>
+    function validatorCoupen() {
+      const coupenName = document.getElementById('couponName').value
+      const validity = document.getElementById('validity').value
+      const minAmount = document.getElementById('minAmount').value
+      const description = document.getElementById('description').value
+      const discountPercentage = document.getElementById('discountPercentage').value
+      const maxDiscountValue = document.getElementById('maxDiscountValue').value
+      const error = document.getElementById('errorDisplay')
+      let flag = 1
+      if (coupenName == "") {
+        error.removeAttribute('hidden')
+        error.innerText = "Generate coupen"
+        error.style.background = "rgb(200,0,0,0.1)"
+        error.style.width = "100%"
+        flag = 2
+      } else if (validity == '') {
+        error.removeAttribute('hidden')
+        error.innerText = 'expiry date is required'
+        error.style.background = 'rgb(200,0,0,0.1)'
+        error.style.width = "100%"
+        flag = 2
+      } else if (new Date(validity) - new Date() <= 0) {
+        error.removeAttribute('hidden')
+        error.innerText = 'this date has already expired'
+        error.style.background = 'rgb(200,0,0,0.1)'
+        error.style.width = "100%"
+        flag = 2
+      } else if (minAmount == '' || minAmount.length==0 ||!minAmount.match(/^\d+(\.\d{1,2})?$/)) {
+        error.removeAttribute('hidden')
+        error.innerText = 'min amount is not valid'
+        error.style.background = 'rgb(200,0,0,0.1)'
+        error.style.width = "100%"
+        flag = 2
+      } else if (minAmount < 1000) {
+        error.removeAttribute('hidden')
+        error.innerText = 'min amount should be greater that 1000'
+        error.style.background = 'rgb(200,0,0,0.1)'
+        error.style.width = "100%"
+        flag = 2
+      } else if (discountPercentage == '') {
+        error.removeAttribute('hidden')
+        error.innerText = ' discount percentage is required'
+        error.style.background = 'rgb(200,0,0,0.1)'
+        error.style.width = "100%"
+        flag = 2
+      } else if (discountPercentage <= 0) {
+        error.removeAttribute('hidden')
+        if (discountPercentage > 100) {
+          error.innerText = ' discount percentage cannot be greated than 100'
+          error.style.background = 'rgb(200,0,0,0.1)'
+          error.style.width = "100%"
+          flag = 2
+        } else if (discountPercentage <script ) {
+          error.innerText = ' discount percentage cannot be less than 0'
+          error.style.background = 'rgb(200,0,0,0.1)'
+          error.style.width = "100%"
+          flag = 2
+        }
+        else if(discountPercentage==''|| discountPercentage.length==0 ||!discountPercentage.match(/^\d+(\.\d{1,2})?$/)){
+          error.removeAttribute('hidden')
+        error.innerText = 'Discount percent is not valid'
+        error.style.background = 'rgb(200,0,0,0.1)'
+        error.style.width = "100%"
+        flag = 2
+        }
+      } else if (maxDiscountValue > (minAmount * discountPercentage / 100)) {
+        error.removeAttribute('hidden')
+        console.log(minAmount * discountPercentage / 100);
+        error.innerText = `maximum offer price should be  ${minAmount*discountPercentage/100 }`
+        error.style.background = 'rgb(200,0,0,0.1)'
+        error.style.width = "100%"
+        flag = 2
+      } else if (maxDiscountValue == '' || maxDiscountValue.length==0 ||!maxDiscountValue.match(/^\d+(\.\d{1,2})?$/)) {
+        error.removeAttribute('hidden')
+        error.innerText = 'Max Discount value is not valid'
+        error.style.background = 'rgb(200,0,0,0.1)'
+        error.style.width = "100%"
+        flag = 2
+      } else if (description == ''||description.length==0) {
+        error.removeAttribute('hidden')
+        error.innerText = 'description is not valid'
+        error.style.background = 'rgb(200,0,0,0.1)'
+        error.style.width = "100%"
+        flag = 2
+      }
+      if (flag == 1) {
+        submitCoupon(coupenName, new Date(validity), parseInt(minAmount), description, parseInt(discountPercentage), maxDiscountValue)
+      }
+    }
+    function submitCoupon(coupenName,validity,minAmount,description,discountPercentage,maxDiscountValue){
+          $.ajax({
+            url:'/admin/add-coupons',
+            method:'post',
+            data:{
+                coupenName,validity,minAmount,description,discountPercentage,maxDiscountValue
+            },
+            success:((response)=>{
+                if(response){
+                    location.href="/admin/coupons"
+                }
+            })
+          })
+    }
+    </script>

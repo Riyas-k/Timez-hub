@@ -1,0 +1,33 @@
+<section class="main-wrap">
+  <div class="container d-flex justify-content-center">
+    <div class="row w-75 mt-5">
+      <div class="col-md-12">
+        <h2 class="text-center">Add Category</h2>
+        <form action="/admin/edit-category/<%=data._id%>" method="post">
+          <label for="">Category Name</label>
+          <input
+            type="text"
+            name="categoryName"
+            value="<%=data.Name%>"
+            class="form-control"
+            required
+          />
+          <input
+          type="text"
+          name="offer"
+          value="<%=data.offer%>"
+          class="form-control"
+          required
+        />
+          <button type="submit" class="btn btn-success mt-4" onclick="Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Changes Saved',
+            showConfirmButton: false,
+            timer: 1500
+          })">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,143 @@
+
+<!-- //new -->
+
+<aside class="navbar-aside" id="offcanvas_aside">
+  <div class="aside-top">
+    <div class="logo logo-width-1 wow fadeIn animated">
+      <a href="/admin"style="color: #000;"
+        >   <img src="https://images.cooltext.com/5652787.png"    class="ml-30" alt=""></a>
+    </div>
+    <div>
+      <button class="btn btn-icon btn-aside-minimize" >
+        <i class="text-muted material-icons md-menu_open" style="color: #000;"></i>
+      </button>
+    </div>
+  </div>
+  <nav>
+    <ul class="menu-aside">
+      <li class="menu-item active" style="margin-bottom: 1.5rem">
+        <a class="" href="/admin" style="text-decoration: none">
+          <i class="icon material-icons md-home" style="color: #000;"></i>
+          <span class="text" style="color: #000">Dashboard</span>
+        </a>
+      </li>
+      <li class="menu-item has-submenu" style="margin-bottom: 1.5rem">
+        <a class="" href="/admin/view-products" style="text-decoration: none">
+          <i class="icon material-icons md-shopping_bag" style="color: #000;"></i>
+          <span class="text" style="color: #000">Products</span>
+        </a>
+      </li>
+      <li class="menu-item has-submenu">
+        <a
+          class=""
+          href="/admin/add-category"
+          style="text-decoration: none; margin-bottom: 1.5rem"
+        >
+          <i class="icon material-icons md-store" style="color: #000;"></i>
+          <span class="text" style="color: #000">Categories</span>
+        </a>
+      </li>
+
+      <li class="menu-item has-submenu">
+        <a
+          class=""
+          href="/admin/orders"
+          style="text-decoration: none; margin-bottom: 1.5rem"
+        >
+          <i class="icon material-icons md-shopping_cart"style="color: #000;"></i>
+          <span class="text" style="color: #000">Orders</span>
+        </a>
+      </li>
+
+      <li class="menu-item has-submenu">
+        <a
+          class=""
+          href="/admin/add-product"
+          style="text-decoration: none; margin-bottom: 1.5rem"
+        >
+          <i class="icon material-icons md-add_box"style="color: #000;"></i>
+          <span class="text" style="color: #000">Add Product</span>
+        </a>
+      </li>
+      <li class="menu-item has-submenu">
+        <a
+          class=""
+          href="/admin/view-users"
+          style="text-decoration: none; margin-bottom: 1.5rem"
+        >
+          <i class="icon material-icons md-person"style="color: #000;"></i>
+          <span class="text" style="color: #000">Users</span>
+        </a>
+      </li>
+      <li class="menu-item has-submenu">
+        <a
+          class=""
+          href="/admin/add-coupons"
+          style="text-decoration: none; margin-bottom: 1.5rem"
+        >
+        <i class="icon material-icons md-add_box"style="color: #000;"></i>
+          <span class="text" style="color: #000">AddCoupons</span>
+        </a>
+      </li>
+      <li class="menu-item has-submenu">
+        <a
+          class=""
+          href="/admin/coupons"
+          style="text-decoration: none; margin-bottom: 1.5rem"
+        >
+          <i class="icon material-icons md-person"style="color: #000;"></i>
+          <span class="text" style="color: #000">Coupons</span>
+        </a>
+      </li>
+
+      <li
+        class="menu-item has-submenu"
+        style="text-decoration: none; margin-bottom: 1.5rem"
+      >
+        <a class="" href="/admin/add-banner">
+          <i class="icon material-icons md-add_box"style="color: #000;"></i>
+          <span class="text" style="color: #000">Add Banners</span>
+        </a>
+      </li>
+      <li
+        class="menu-item has-submenu"
+        style="text-decoration: none; margin-bottom: 1.5rem"
+      >
+        <a class="" href="/admin/banners">
+          <i class="icon material-icons md-settings"style="color: #000;"></i>
+          <span class="text" style="color: #000"> Banners</span>
+        </a>
+      </li>
+    </ul>
+
+    <br />
+    <br />
+  </nav>
+</aside>
+
+<style>
+  .hidden {
+  display: none;
+}
+
+</style>
+
+<script>
+const minimizeButton = document.querySelector('.btn-aside-minimize');
+const spanTexts = document.querySelectorAll('.text');
+
+minimizeButton.addEventListener('click', () => {
+  spanTexts.forEach(span => {
+    span.classList.toggle('hidden');
+  });
+});
+
+
+</script>
+
+
+
+
+
+
+

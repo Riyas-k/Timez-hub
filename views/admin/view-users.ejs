@@ -1,0 +1,51 @@
+<section class="main-wrap">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="productsTable">
+          <thead>
+            <tr>
+              <th class="d-none d-sm-table-cell" scope="col">NO</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone No</th>
+              <th scope="col">Options</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% data.forEach(function(data,index){ %>
+            <tr>
+              <th class="d-none d-sm-table-cell" scope="row"><%=index+1%></th>
+              <td><%=data.Name%></td>
+              <td><%=data.Email%></td>
+              <td><%=data.PhoneNo%></td>
+              <td>
+                <% if(data.blocked==false) {%>
+                <a
+                  href="/admin/block-user/<%=data._id%>"
+                  class="btn btn-danger btn-sm"
+                  onclick="return confirm('Are you sure you want to block <%=data.Name%> ?')"
+                  >BLOCK</a
+                >
+                <% }else { %>
+                <a
+                  href="/admin/unblock-user/<%=data._id%>"
+                  class="btn btn-primary btn-sm" onclick="Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Unblocked',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })"
+                  >UNBLOCK</a
+                >
+                <% } %>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

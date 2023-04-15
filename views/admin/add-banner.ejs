@@ -1,0 +1,145 @@
+<section class="main-wrap">
+  <div class="container d-flex justify-content-center">
+    <div class="row w-75 mt-5">
+      <div class="col-md-12">
+        <h2 class="text-center">Add Banner</h2>
+        <form
+          name="myform"
+          action="/admin/add-banner"
+          method="POST"
+          onsubmit="return validateImage()"
+          enctype="multipart/form-data"
+          id="form"
+        >
+          <label for="">Title</label>
+          <input
+            type="text"
+            name="title"
+            class="form-control"
+            id="title"
+            onkeyup="validateTitle()"
+          />
+          <span id="title-error" class="validation-label"></span>
+
+          <label for="">Description</label>
+          <input
+            type="text"
+            name="description"
+            class="form-control"
+            id="description"
+            onkeyup="validateDescription()"
+          />
+          <span id="description-error" class="validation-label"></span>
+
+          <label for="">Link</label>
+          <input
+            type="text"
+            name="link"
+            class="form-control"
+            id="link"
+            onkeyup="validateLink()"
+          />
+          <span id="link-error" class="validation-label"></span>
+
+          <label for="">Image</label>
+          <input
+            type="file"
+            name="image"
+            class="form-control"
+            id="image"
+            onkeyup="validateImage()"
+          />
+          <span id="image-error" class="validation-label"></span>
+
+          <button type="submit" class="btn btn-success mt-4" onclick="Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Banner Added',
+            showConfirmButton: false,
+            timer: 1500
+          })">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  function viewImage(event) {
+    document.getElementById("file").src = URL.createObjectURL(
+      event.target.files[0]
+    );
+  }
+</script>
+<script>
+  const img = document.forms["myform"]["file"];
+  const validExt = ["jpeg", "png", "jpg", "webp", "raw", "tiff", "bmp", "gif"];
+  function validateImage() {
+    if (img.value !== "") {
+      const dot_pos = img.value.lastIndexOf(".") + 1;
+      const img_ext = img.value.substring(dot_pos);
+      const result = validExt.includes(img_ext);
+      if (result == false) {
+        swal.fire("OOPs!", "Selected file is not an image!", "error");
+        return false;
+      } else {
+        if (Number(img.files[0].size / (1024 * 1024)) >= 3) {
+          swal.fire(
+            "OOPs!",
+            "Size must be smaller than 3 MB . Current size is :" +
+              Number(img.files[0].size / (1024 * 1024)),
+            "error"
+          );
+          // alert('Size must be smaller than 3 MB . Current size is :' + Number(img.files[0].size/(1024*1024)))
+        }
+      }
+    } else {
+      swal.fire("error", "No image is selected...", "error");
+      // alert('No image is selected...');
+      return false;
+    }
+    return true;
+  }
+
+  const titleError = document.getElementById("title-error");
+  // const descriptionError = document.getElementById('description-error');
+  // const linkError = document.getElementById('link-error');
+  const form = document.getElementById("form");
+
+  function validateTitle() {
+    const title = document.getElementById("title").value;
+    const titleInput = document.getElementById("title");
+
+    if (title.length == 0) {
+      titleError.innerHTML = "title is required";
+      titleError.style.color = "red";
+      titleInput.style.border = "solid 2px red";
+      return false;
+    }
+    if (!title.match(/^[A-Za-z]{3,}$/)) {
+      titleError.innerHTML = "Write valid title";
+      titleError.style.color = "red";
+      titleInput.style.border = "solid 2px red";
+
+      return false;
+    }
+    titleError.innerHTML = "";
+    // titleError.innerHTML = "Valid title";
+    titleError.style.color = "green";
+    titleInput.style.border = "solid 2px green";
+
+    return true;
+  }
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!validateTitle()) {
+      Swal.fire({
+        icon: "error",
+        title: "Enter details correctly!!",
+      });
+      return false;
+    } else {
+      form.submit();
+    }
+  });
+</script>

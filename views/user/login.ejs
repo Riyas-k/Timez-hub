@@ -1,0 +1,97 @@
+<section>
+  <main class="main">
+    <section class="p-auto my-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 m-auto">
+            <div class="row d-flex justify-content-center">
+              <div class="col-lg-6">
+                <div
+                  class="login_wrap widget-taber-content p-30 background-white border-radius-10 mb-md-5 mb-lg-0 mb-sm-5"
+                >
+                  <div class="padding_eight_all bg-white">
+                    <div class="heading_s1">
+                      <h3 class="mb-30 text-center">Login</h3>
+                    </div>
+                    <% if(locals.block) { %>
+                    <p class="text-center" style="color: red">
+                      You're blocked by Admin
+                    </p>
+                    <%}%> <%if(locals.logged==false){ %>
+                    <p style="color: red" class="message text-center">
+                      Incorrect Username or Password
+                    </p>
+                    <% } %>
+                    <form method="post" action="/login">
+                      <div class="form-group">
+                        <input
+                          type=""
+                          required=""
+                          name="email"
+                          placeholder="Your Email"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <input
+                          required=""
+                          type="password"
+                          name="password"
+                          placeholder="Password"
+                        />
+                      </div>
+
+                      <div class="form-group">
+                        <button
+                          type="submit"
+                          class="btn btn-fill-out btn-block hover-up bg-dark"
+                          name="login"
+                          style="width: 100%"
+                        >
+                          Log in
+                        </button>
+                      </div>
+                    </form>
+                    <div>
+                      <p class="mb-3 text-center text-success">OR</p>
+                    </div>
+                    <div class="form-group">
+                      <a href="/otpNumber">
+                        <button
+                          type="submit"
+                          class="btn btn-fill-out btn-block hover-up bg-dark"
+                          name="login"
+                          style="width: 100%"
+                        >
+                          Request OTP
+                        </button>
+                      </a>
+                    </div>
+                    <div>
+                      <a class="ms-5" href="/signup">New ? Create An Account</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Preloader Start -->
+  <div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+      <div class="preloader-inner position-relative">
+        <div class="text-center">
+          <h5 class="mb-5">TIMES HUB</h5>
+          <div class="loader">
+            <div class="bar bar1"></div>
+            <div class="bar bar2"></div>
+            <div class="bar bar3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

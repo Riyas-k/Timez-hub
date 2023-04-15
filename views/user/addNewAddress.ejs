@@ -1,0 +1,158 @@
+<section class="mt-50 mb-50 text-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="mb-25">
+          <h4>Add Address</h4>
+        </div>
+        <form action="/add-address" method="post" id="address-form">
+          <div class="form-group">
+            <input
+              type="text"
+              required=""
+              name="fname"
+              placeholder="First name *"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              required=""
+              name="lname"
+              placeholder="Last name *"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              required=""
+              type="text"
+              name="street"
+              placeholder="Street Name"
+            />
+          </div>
+
+          <div class="form-group">
+            <input
+              type="text"
+              name="apartment"
+              required=""
+              placeholder="Apartment *"
+            />
+          </div>
+          <div class="form-group">
+            <input type="text" name="city" required="" placeholder="City" />
+          </div>
+          <div class="form-group">
+            <input required="" type="text" name="state" placeholder="State" />
+          </div>
+          <div class="form-group">
+            <input
+              required=""
+              type="text"
+              name="pincode"
+              placeholder="Pincode"
+            />
+          </div>
+          <div class="form-group">
+            <input required="" type="text" name="mobile" placeholder="Mobile" />
+          </div>
+          <div class="form-group">
+            <input required="" type="text" name="email" placeholder="email" />
+          </div>
+          <button type="submit" class="btn btn-dark bg-dark">Save Address</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  $(document).ready(function () {
+    $("#address-form").validate({
+      rules: {
+        fname: {
+          required: true,
+          minlength: 2,
+        },
+        lname: {
+          required: true,
+          minlength: 2,
+        },
+        apartment: {
+          required: true,
+        },
+        city: {
+          required: true,
+        },
+        state: {
+          required: true,
+        },
+        pincode: {
+          required: true,
+          digits: true,
+          minlength: 6,
+          maxlength: 6,
+        },
+        mobile: {
+          required: true,
+          digits: true,
+          minlength: 10,
+          maxlength: 10,
+        },
+        email: {
+          required: true,
+          email: true,
+        },
+      },
+      messages: {
+        fname: {
+          required: "Please enter your first name",
+          minlength: "First name should have at least 2 characters",
+        },
+        lname: {
+          required: "Please enter your last name",
+          minlength: "Last name should have at least 2 characters",
+        },
+        apartment: {
+          required: "Please enter your apartment name or number",
+        },
+        city: {
+          required: "Please enter your city name",
+        },
+        state: {
+          required: "Please enter your state name",
+        },
+        pincode: {
+          required: "Please enter your pincode",
+          digits: "Pincode should contain only digits",
+          minlength: "Pincode should have 6 digits",
+          maxlength: "Pincode should have 6 digits",
+        },
+        mobile: {
+          required: "Please enter your mobile number",
+          digits: "Mobile number should contain only digits",
+          minlength: "Mobile number should have 10 digits",
+          maxlength: "Mobile number should have 10 digits",
+        },
+        email: {
+          required: "Please enter your email",
+          email: "Please enter a valid email",
+        },
+      },
+    });
+  });
+</script>
+<style>
+  .error-message {
+    color: red;
+    font-size: 12px;
+  }
+
+  .is-invalid {
+    border-color: red;
+  }
+
+  label.error {
+    color: red;
+  }
+</style>

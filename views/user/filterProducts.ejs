@@ -1,0 +1,431 @@
+<section>
+    <!-- <div class="page-header breadcrumb-wrap"> -->
+      <!-- <div class="container">
+        <div class="breadcrumb">
+          <a href="index.html" rel="nofollow">Home</a>
+          <span></span> Shop
+        </div>
+      </div> -->
+    <!-- </div>  -->
+    <div class="mobile-header-active mobile-header-wrapper-style">
+      <div class="mobile-header-wrapper-inner">
+        <div class="mobile-header-top">
+          <div class="mobile-header-logo">
+           
+          </div>
+          <div
+            class="mobile-menu-close close-style-wrap close-style-position-inherit"
+          >
+            <button class="close-style search-close">
+              <i class="icon-top"></i>
+              <i class="icon-bottom"></i>
+            </button>
+          </div>
+        </div>
+        <div class="mobile-header-content-area">
+          <div class="mobile-search search-style-3 mobile-header-border">
+            <form action="#">
+              <input type="text" placeholder="Search for items…" />
+              <button type="submit"><i class="fi-rs-search"></i></button>
+            </form>
+          </div>
+          <div class="mobile-menu-wrap mobile-header-border">
+            <!-- mobile menu start -->
+            <nav>
+              <ul class="mobile-menu">
+                <li class="menu-item-has-children">
+                  <span class="menu-expand"></span><a href="/">Home</a>
+                </li>
+                <li class="menu-item-has-children">
+                  <span class="menu-expand"></span><a href="/shop">Shop</a>
+                </li>
+                <li class="menu-item-has-children">
+                  <span class="menu-expand"></span><a href="/orders">Orders</a>
+                </li>
+              
+  
+                <!-- <li class="menu-item-has-children">
+                  <span class="menu-expand"></span><a href="#">Language</a>
+                  <ul class="dropdown">
+                    <li><a href="#">English</a></li>
+                    <li><a href="#">French</a></li>
+                    <li><a href="#">German</a></li>
+                    <li><a href="#">Spanish</a></li>
+                  </ul>
+                </li> -->
+              </ul>
+            </nav>
+            <!-- mobile menu end -->
+          </div>
+          <!-- <div class="mobile-header-info-wrap mobile-header-border">
+            <div class="single-mobile-header-info mt-30">
+              <a href="page-contact.html"> Our location </a>
+            </div>
+            <div class="single-mobile-header-info">
+              <a href="page-login-register.html">Log In / Sign Up </a>
+            </div>
+           -->
+          </div>
+          <!-- <div class="mobile-social-icon">
+            <h5 class="mb-15 text-grey-4">Follow Us</h5>
+            <a href="#"
+              ><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""
+            /></a>
+            <a href="#"
+              ><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""
+            /></a>
+            <a href="#"
+              ><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""
+            /></a>
+            <a href="#"
+              ><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""
+            /></a>
+            <a href="#"
+              ><img src="assets/imgs/theme/icons/icon-youtube.svg" alt=""
+            /></a>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <main class="main">
+      <section class="mt-50 mb-50">
+        <div class="container">
+          <div class="row flex-row-reverse">
+            <div class="col-lg-9">
+              <div class="shop-product-fillter">
+                <div class="totall-product">
+                
+                </div>
+                <!-- <form id="sort-form" method="POST" action="/sort">
+                    <div class="sort-container">
+                      <select
+                      id="sort-select"
+                      name="selectedValue"
+                      onchange="this.form.submit()"
+                      >
+                        <option value=""><a href="#">Filter</a></option>
+                        <option value="price-low-to-high">
+                          <a href="#">Price: Low to High</a>
+                        </option>
+                        <option value="price-high-to-low">
+                          <a href="#">Price: High to Low</a>
+                        </option>
+                      </select>
+                    </div>
+                  </form> -->
+              </div>
+              <div class="row product-grid-4">
+                <% data.forEach(function(data){ %>
+                  <div class="col-lg-3 col-md-4 col-12 col-sm-6">
+                    <div class="product-cart-wrap mb-30">
+                      <div class="product-img-action-wrap">
+                        <div class="product-img product-img-zoom">
+                          <a href="/fullImage/<%=data._id%>">
+                            <img
+                              class="default-img"
+                              src="/images/<%=data.Image[0]%>" style="height: 150px;"
+                              alt=""
+                            />
+                            <!-- <img
+                              class="hover-img"
+                              src="/images/<%=data.Image%>"
+                              alt=""
+                            /> -->
+                          </a>
+                        </div>
+                        <div class="product-action-1">
+                          <button
+                            type="button"
+                            aria-label="Add To Wishlist"
+                            class="action-btn hover-up"
+                            onclick="addToWishlist('<%=data._id%>')
+                          Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Product is successfully added to wishlist',
+                            showConfirmButton: false,
+                            timer: 1500
+                          })"
+                          >
+                            <i class="fi-rs-heart"></i>
+                          </button>
+                        </div>
+                        <div
+                          class="product-badges product-badges-position product-badges-mrg"
+                        >
+                          <!-- <span class="hot">Hot</span> -->
+                        </div>
+                      </div>
+                      <div class="product-content-wrap">
+                        <div class="product-category">
+                          <a href="/fullImage/<%=data._id%>"><%=data.Category%></a>
+                        </div>
+                        <h2>
+                          <a href="/fullImage/<%=data._id%>"
+                            ><%=data.ProductName%></a
+                          >
+                        </h2>
+                        <!-- <div class="rating-result" title="90%">
+                          <span>
+                            <span>90%</span>
+                          </span>
+                        </div> -->
+                        <div class="product-price">
+                          <span>₹<%=data.OfferPrice%></span>
+                          <span class="old-price">₹<%=data.Price%></span>
+                        </div>
+                        <div class="product-action-1 show">
+                            <% if(data.Quantity>0){ %>
+                            <button
+                            aria-label="Add To Cart"
+                            class="action-btn hover-up"
+                              onclick="addToCart('<%= data._id %>'); Swal.fire({
+                              position: 'center',
+                              icon: 'success',
+                              title: 'Item Added Successfully To Cart',
+                              showConfirmButton: false,
+                              timer: 2000
+                            })"
+                            ><i class="fi-rs-shopping-bag-add"></i
+                          ></button>
+                         <%}else{ %>
+                            <p class="text-danger">out-of-stock</p>
+                         <% } %>
+                     
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <% }) %>
+                </div>
+              <!--pagination-->
+              <div class="mt-15 mb-sm-5 mb-lg-0">
+                <nav aria-label="">
+                  <ul class="pagination justify-content-center">
+                 
+              
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            <div class="col-lg-3 primary-sidebar sticky-sidebar">
+              <div class="widget-category mb-30">
+                <h5 class="section-title style-1 mb-30 wow fadeIn animated">
+                  Category
+                </h5>
+                <ul class="categories">
+                  <% category.forEach(function(data){ %>
+  
+               
+                  <li><a href="/get-categoryProducts/<%=data._id%>" ><%=data.Name%></a></li>
+                  <% }) %>
+                </ul>
+              </div>
+              <!-- Fillter By Price -->
+              <!-- <div class="sidebar-widget price_range range mb-30">
+                <div class="widget-header position-relative mb-20 pb-10">
+                  <h5 class="widget-title mb-10">Fill by price</h5>
+                  <div class="bt-1 border-color-1"></div>
+                </div>
+                <div class="price-filter">
+                  <div class="price-filter-inner">
+                    <div id="slider-range"></div>
+                    <div class="price_slider_amount">
+                      <div class="label-input">
+                        <span>Range:</span
+                        ><input
+                          type="text"
+                          id="amount"
+                          name="price"
+                          placeholder="Add Your Price"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="list-group">
+                  <div class="list-group-item mb-10 mt-10">
+                    <label class="fw-900">Color</label>
+                    <div class="custome-checkbox">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="checkbox"
+                        id="exampleCheckbox1"
+                        value=""
+                      />
+                      <label class="form-check-label" for="exampleCheckbox1"
+                        ><span>Red (56)</span></label
+                      >
+                      <br />
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="checkbox"
+                        id="exampleCheckbox2"
+                        value=""
+                      />
+                      <label class="form-check-label" for="exampleCheckbox2"
+                        ><span>Green (78)</span></label
+                      >
+                      <br />
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="checkbox"
+                        id="exampleCheckbox3"
+                        value=""
+                      />
+                      <label class="form-check-label" for="exampleCheckbox3"
+                        ><span>Blue (54)</span></label
+                      >
+                    </div>
+                    <label class="fw-900 mt-15">Item Condition</label>
+                    <div class="custome-checkbox">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="checkbox"
+                        id="exampleCheckbox11"
+                        value=""
+                      />
+                      <label class="form-check-label" for="exampleCheckbox11"
+                        ><span>New (1506)</span></label
+                      >
+                      <br />
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="checkbox"
+                        id="exampleCheckbox21"
+                        value=""
+                      />
+                      <label class="form-check-label" for="exampleCheckbox21"
+                        ><span>Refurbished (27)</span></label
+                      >
+                      <br />
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="checkbox"
+                        id="exampleCheckbox31"
+                        value=""
+                      />
+                      <label class="form-check-label" for="exampleCheckbox31"
+                        ><span>Used (45)</span></label
+                      >
+                    </div>
+                  </div>
+                </div>
+                <a href="shop-grid-right.html" class="btn btn-sm btn-default"
+                  ><i class="fi-rs-filter mr-5"></i> Fillter</a
+                >
+              </div> -->
+          
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="main">
+     
+      <section class="section-padding footer-mid">
+        <div class="container pt-15 pb-20">
+          <div class="row">
+            <div class="col-lg-4 col-md-6">
+              <div class="widget-about font-md mb-md-5 mb-lg-0">
+                <div class="logo logo-width-1 wow fadeIn animated">
+                
+                </div>
+              
+               
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-3">
+              <h5 class="widget-title wow fadeIn animated">About</h5>
+              <ul class="footer-list wow fadeIn animated mb-sm-5 mb-md-0">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Delivery Information</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms &amp; Conditions</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Support Center</a></li>
+              </ul>
+            </div>
+            <div class="col-lg-2 col-md-3">
+              <h5 class="widget-title wow fadeIn animated">My Account</h5>
+              <ul class="footer-list wow fadeIn animated">
+                <!-- <li><a href="#">Sign In</a></li> -->
+                <li><a href="#">View Cart</a></li>
+                <li><a href="#">My Wishlist</a></li>
+                <li><a href="#">Track My Order</a></li>
+                <li><a href="#">Help</a></li>
+                <li><a href="#">Order</a></li>
+              </ul>
+            </div>
+            <div class="col-lg-4">
+              <!-- <h5 class="widget-title wow fadeIn animated">Install App</h5> -->
+              <div class="row">
+               
+                <div class="col-md-4 col-lg-12 mt-md-3 mt-lg-0">
+                  <p class="mb-20 wow fadeIn animated">
+                    Secured Payment Gateways
+                  </p>
+                  <img
+                    class="wow fadeIn animated"
+                    src="assets/imgs/theme/payment-method.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="container pb-20 wow fadeIn animated">
+        <div class="row">
+          <div class="col-12 mb-20">
+            <div class="footer-bottom"></div>
+          </div>
+          <div class="col-lg-6">
+            <p class="float-md-left font-sm text-muted mb-0">
+              &copy; 2021, <strong class="text-brand">TIMES HUB</strong>
+            </p>
+          </div>
+         
+        </div>
+      </div>
+    </footer>
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+      <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+          <div class="text-center">
+            <h5 class="mb-5">TIMES HUB</h5>
+            <div class="loader">
+              <div class="bar bar1"></div>
+              <div class="bar bar2"></div>
+              <div class="bar bar3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+  function addToCart(proId){
+    $.ajax({
+      url:'/addToCart/'+proId,
+      method:'get',
+       success:(response)=>{
+        if(response.status){
+          let count=$('#cartCount').html()
+          count = parseInt(count)+1;
+          $('#cartCount').html(count)
+        }
+       }
+    })
+  }
+
+  </script>

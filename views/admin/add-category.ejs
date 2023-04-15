@@ -1,0 +1,143 @@
+<section class="main-wrap">
+  <div class="container d-flex justify-content-center">
+    <div class="row w-75 mt-5">
+      <div class="col-md-12">
+        <h2 class="text-center">Add Category</h2>
+        <form action="/admin/add-category" id="category-form" method="post">
+          <% if(locals.status){ %>
+          <p style="color: red">Already Exist</p>
+          <% } %>
+          <label for="">Category Name</label>
+          <span
+            id="name-error"
+            style="color: red"
+            class="validation-label"
+          ></span>
+          <input
+            type="text"
+            name="categoryName"
+            class="form-control"
+            required
+            minlength="3"
+          />
+          <label for="" class="mt-2">Offer</label>
+          <input
+          type="text"
+          name="offer"
+          class="form-control"
+          required
+        />
+          <button type="submit" class="btn btn-success mt-4" onclick="Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Category Added Successfully',
+            showConfirmButton: false,
+            timer: 1500
+          })">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Table section -->
+<section class="main-wrap">
+  <div class="card-body">
+    <div class="row w-100 mt-5 mx-auto">
+      <div class="table-responsive">
+        <div class="table-responsive">
+          <table class="table align-middle table-nowrap mb-0" id="productsTable">
+            <thead class="table-light">
+              <tr>
+                <th class="align-middle" scope="col">No</th>
+                <th class="align-middle" scope="col">Category Name</th>
+                <th class="align-middle" scope="col">Offer</th>
+                <th class="align-middle" scope="col">Option</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% data.forEach(function(data,index){ %>
+              <tr>
+                <td><%=index+1%></td>
+                <td><%=data.Name%></td>
+                <td>₹<%=data.offer%></td>
+                <td>
+                  <a
+                    href="/admin/edit-category/<%=data._id%>"
+                    class="btn btn-xs btn-success"
+                  >
+                    Edit</a
+                  >
+                  <a
+                    href="/admin/delete-category/<%=data._id%>"
+                    class="btn btn-xs btn-danger"
+                    onclick="Swal.fire({
+                      position: 'center',
+                      icon: 'success',
+                      title: 'Category deleted Successfully',
+                      showConfirmButton: false,
+                      timer: 2000
+                    })"
+                  >
+                    Delete</a
+                  >
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- table-responsive end// -->
+    </div>
+  </div>
+</section>
+
+<script>
+  $(document).ready(function () {
+    console.log("ready");
+    $("#category-form").validate({
+      rules: {
+        categoryName: {
+          required: true,
+          alphanumeric: true,
+          notOnlySpaces: true,
+          minlength: 3,
+        },
+      },
+      messages: {
+        categoryName: {
+          required: "Please enter a category name.",
+          alphanumeric: "Only letters and numbers are allowed.",
+          minlength: "Category name must be at least 3 characters long.",
+        },
+      },
+      errorElement: "span",
+      errorClass: "error-message",
+      highlight: function (element) {
+        $(element).addClass("is-invalid");
+      },
+      unhighlight: function (element) {
+        $(element).removeClass("is-invalid");
+      },
+    });
+
+    jQuery.validator.addMethod(
+      "notOnlySpaces",
+      function (value, element) {
+        return $.trim(value).length !== 0;
+      },
+      "Category name can't be just spaces"
+    );
+  });
+</script>
+
+<style>
+  .error-message {
+    color: red;
+    font-size: 12px;
+  }
+
+  .is-invalid {
+    border-color: red;
+  }
+</style>

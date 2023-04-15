@@ -1,0 +1,266 @@
+<header class="header-area header-style-3 header-height-2" >
+  <div class="header-top header-top-ptb-1 d-none d-lg-block" style="background-color: white;">
+    <div class="container" >
+      <div class="row align-items-center">
+        <div class="col-xl-3 col-lg-4">
+          <div class="header-info" >
+            <ul>
+              <li>
+                <!-- <i class="fi-rs-smartphone"></i>
+                <a href="#">(+01) - 2345 - 6789</a> -->
+              </li>
+              <li>
+                <!-- <i class="fi-rs-marker"></i
+                ><a href="page-contact.html">Our location</a> -->
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-4 ">
+          <div class="text-center text-dark">
+            <div id="news-flash" class="d-inline-block">
+              <ul>
+                <li>
+                  Get Luxury Watches up to 50% off
+                  <a href="/shop">View details</a>
+                </li>
+                <!-- <li>Supper Value Deals - Save more with coupons</li>
+                <li>
+                  Trendy 25silver jewelry, save up 35% off today
+                  <a href="shop-grid-right.html">Shop now</a>
+                </li> -->
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-4">
+          <div class="header-info header-info-right">
+            <ul>
+              <li>
+                <a class="language-dropdown-active text-dark" href="#">
+                  <i class="fi-rs-world"></i> English
+                  <!-- <i class="fi-rs-angle-small-down"></i -->
+                </a>
+              
+              </li>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle"  style="background-color:  #000000;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  <% if ( locals.user) { %>
+              <i class="fa-solid fa-user"></i>
+              <%=user.userName %>
+                    <%} else { %>
+                    Account 
+                    <% } %>
+          
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <% if (locals.user) { %>
+                    <a href="/profile" class="dropdown-item text-dark">Edit Profile</a>
+                    <a class="dropdown-item text-dark" href="/logout"> log out</a></li>
+                    <%} else { %>
+                      <li><a class="dropdown-item text-dark" href="/login"> log in</a></li>
+                      <% } %>
+                    </ul>
+                  </div>
+                </ul>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
+    <div class="container">
+      <div class="header-wrap">
+        <div class="logo logo-width-1">
+          <a href="/"
+          
+          ><img src="https://images.cooltext.com/5652787.png" height="40px" alt="">
+        </a> 
+        </div>
+        <div class="header-right">
+          <div class="search-style-2">
+            <% if(locals.search){ %>
+            <form action="/search" method="post">
+                <input type="text" name="search" placeholder="Search for Watches..." />
+                <button type="submit" hidden>Search</button>
+
+               <%}else{%>
+                <input type="text" name="search" hidden placeholder="Search for Watches..." />
+                <button type="submit" hidden>Search</button>
+                
+              </form>
+              <% }%>
+          </div>
+          <div class="header-action-right">
+            <div class="header-action-2">
+              <div class="header-action-icon-2">
+                <a href="/wish-list">
+                  <img
+                    class="svgInject"
+                    alt="Evara"
+                    src="assets/imgs/theme/icons/icon-heart.svg"
+                  />
+                  <% if(locals.user) { %>
+                  <span class="pro-count blue bg-dark" id="wishListCount"><%=locals.wishListCount%></span>
+                  <%} %>
+                </a>
+              </div>
+              <div class="header-action-icon-2">
+                <a class="mini-cart-icon" href="/cart">
+                  <img
+                    alt="Evara"
+                    src="assets/imgs/theme/icons/icon-cart.svg"
+                  />
+                  <% if(locals.user) { %>
+                    <span class="pro-count blue bg-dark" id="cartCount"><%=locals.count%></span>
+                   <%} %>
+                </a>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="header-bottom header-bottom-bg-color sticky-bar">
+    <div class="container">
+      <div class="header-wrap header-space-between position-relative main-nav">
+        <div class="logo logo-width-1 d-block d-lg-none">
+          <!-- <h4>TIMES HUB</h4> -->
+          <div class="logo logo-width-1 d-block d-lg-none">
+            <div class="logo logo-width-1 d-block d-lg-none">
+              <div class="logo logo-width-1 d-block d-lg-none">
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" style="background-color: #000000;" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-expanded="false">
+                    <% if (locals.user) { %>
+                      <%= user.userName %>
+                    <% } else { %>
+                      Account
+                    <% } %>
+                  </button>
+                        
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <% if (locals.user) { %>
+                      <button class="dropdown-item text-dark" type="button" data-toggle="modal" data-target="#editProfileModal">Edit Profile</button>
+                      <a href="/logout" class="dropdown-item text-dark">Log Out</a>
+                    <% } else { %>
+                      <a href="/login" class="dropdown-item text-dark">Log In</a>
+                    <% } %>
+                  </ul>
+                </div>
+              </div>
+              
+            </div>
+            
+          </div>
+          
+          
+        </div>
+        <div class="ml-150 header-nav d-none d-lg-flex">
+        
+          <div
+            class="ml-150 main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block" 
+            >
+            <nav class="ml-150 justify-content-center">
+              <ul>
+                <li>
+                  <!-- active aakanam -->
+                  <a class="" href="/">Home <i class=""></i></a>
+                </li>
+                <li>
+                  <a href="/shop">Shop <i class=""></i></a>
+                </li>
+                <!-- <li>
+                  <a href="/cart">Cart<i class=""></i></a>
+                </li> -->
+                <li class="position-static">
+                  <a href="/orders">Orders <i class=""></i></a>
+                </li>
+              
+
+                <!-- <li>
+                  <a href="">Contact</a>
+                </li> -->
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div class="header-action-right d-block d-lg-none">
+          <div class="header-action-2">
+            <div class="header-action-icon-2">
+              <a href="/wish-list">
+                <img alt="Evara" src="assets/imgs/theme/icons/icon-heart.svg" />
+                <% if(locals.user) { %>
+                <span class="pro-count blue bg-dark" id="wishListCount"><%=locals.wishListCount%></span>
+                <%} %>
+              </a>
+            </div>
+            <div class="header-action-icon-2">
+              <a class="mini-cart-icon" href="/cart">
+                <img alt="Evara" src="assets/imgs/theme/icons/icon-cart.svg" />
+                <% if(locals.user) { %>
+                  <span class="pro-count blue bg-dark" id="cartCount"><%=locals.count%></span>
+                 <%} %>
+              </a>
+            
+            </div>
+            <div class="header-action-icon-2 d-block d-lg-none">
+              <div class="burger-icon burger-icon-white">
+                <span class="burger-icon-top"></span>
+                <span class="burger-icon-mid"></span>
+                <span class="burger-icon-bottom"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="mobile-header-active mobile-header-wrapper-style">
+  <div class="mobile-header-wrapper-inner">
+    <div class="mobile-header-top">
+      <div class="mobile-header-logo">
+        <img src="https://images.cooltext.com/5651101.png" width="100px" height="20px" alt="">
+      </div>
+      <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
+        <button class="close-style search-close">
+          <i class="icon-top"></i>
+          <i class="icon-bottom"></i>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-header-content-area">
+      <div class="mobile-search search-style-3 mobile-header-border">
+        <form action="#">
+          <input type="text" placeholder="Search for items…" />
+          <button type="submit"><i class="fi-rs-search"></i></button>
+        </form>
+      </div>
+      <div class="mobile-menu-wrap mobile-header-border">
+     
+        <!-- mobile menu start -->
+        <nav>
+          <ul class="mobile-menu">
+            <li class="menu-item-has-children">
+              <span class="menu-expand"></span><a href="/">Home</a>
+            </li>
+            <li class="menu-item-has-children">
+              <span class="menu-expand"></span><a href="/shop">Shop</a>
+            </li>
+            <li class="menu-item-has-children">
+              <span class="menu-expand"></span><a href="/orders">Orders</a>
+            </li>
+          
+          </ul>
+        </nav>
+    
+      </div>
+    
+   
+    </div>
+
+  </div>
+ </div>
+</div>

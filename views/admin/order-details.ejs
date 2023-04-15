@@ -1,0 +1,251 @@
+<section class="main-wrap">
+  <div class="container">
+    <div class="content-header">
+      <div>
+        <h2 class="content-title card-title">Order Details</h2>
+        <p>Details For Order Id : <%=orderDetails._id%></p>
+      </div>
+    </div>
+    <div class="card">
+      <header class="card-header">
+        <div class="row align-items-center">
+          <div class="col-lg-6 col-md-6 mb-lg-0 mb-15">
+            <span>
+              <i class="material-icons md-calendar_today"></i>
+              <b><%=orders[0].orders.createdAt%></b>
+            </span>
+            <br />
+            <small class="text-muted">Order ID:<%=orderDetails._id%></small>
+          </div>
+
+          <div class="col-lg-6 col-md-6 ms-auto text-md-end">
+            <% if(orderDetails.orderStatus!='Cancelled'){ %>
+
+            <form
+              action="/admin/change-order-status"
+              method="post"
+              id="changeOrderStatus"
+             >
+              <select
+                class="form-select d-inline-block mb-lg-0 mb-15 mw-200"
+                style="background-color: rgb(102, 102, 102); color: white"
+                name="status"
+              >
+               <% if(orderDetails.orderStatus!='Return Confirmed'){%>
+
+                <% if(orderDetails.orderStatus!='Return Pending'){ %>
+                  
+                <option>Change Order Status</option>
+                  
+                <option>Cancelled</option>
+                <option>Shipped</option>
+                <option>Delivered</option>
+                <% }else{ %>
+                <option value="Return Confirmed"> <a  onclick="Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Return Successfully',
+                  showConfirmButton: false,
+                  timer: 1500
+                })">Return confirmed </a> </option>
+                <% } %>
+               <% } else{ %>
+                <option value="Return Confirmed">Return confirmed</option>
+                <!-- <p>Returned</p> -->
+               <%}%>
+
+              </select>
+
+              <button
+                type="submit" onclick="changeOrderStatus('<%=orderDetails._id%>','<%=address[0].shippingAddress.user%>');Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Order Status Changed to <%=orderDetails.orderStatus%>',
+                  showConfirmButton: false,
+                  timer: 2000
+                })"
+                class="btn btn-primary"
+              >
+                Save
+              </button>
+            </form>
+            <% } %>
+
+          </div>
+        </div>
+      </header>
+      <!-- card-header end// -->
+      <div class="card-body">
+        <div class="row mb-50 mt-20 order-info-wrap">
+          <div class="col-md-4">
+            <article class="icontext align-items-start">
+              <span class="icon icon-sm rounded-circle bg-primary-light">
+                <i class="text-primary material-icons md-person"></i>
+              </span>
+              <div class="text">
+                <h6 class="mb-1">Customer</h6>
+                <% address.map((object)=>{ %>
+
+                <p class="mb-1">
+                  <%= object.Address.fname%> <%=object.Address.lname%> <br />
+                  <%=object.Address.mobile%> <br />
+                  <%=object.Address.email%>
+                </p>
+                <% }) %>
+              </div>
+            </article>
+          </div>
+          <!-- col// -->
+          <div class="col-md-4">
+            <article class="icontext align-items-start">
+              <span class="icon icon-sm rounded-circle bg-primary-light">
+                <i class="text-primary material-icons md-local_shipping"></i>
+              </span>
+              <div class="text">
+                <h6 class="mb-1">Order Info</h6>
+                <p class="mb-1">
+                  Shipping: A 2 Z express <br />
+                  Payment Method: <%=orderDetails.paymentMethod%><br />
+                  Payment Status:<%=orderDetails.paymentStatus%><br />
+                  OrderStatus:<%=orderDetails.orderStatus%> <br />
+                  Total Amount : <%=orderDetails.total%>
+                </p>
+                <a href="#"></a>
+              </div>
+            </article>
+          </div>
+          <!-- col// -->
+          <div class="col-md-4">
+                <h6 class="mb-1">Deliver To</h6>
+                <% address.map((order)=>{ %>
+
+                <p class="mb-1">
+                  <br /><%=order.Address.apartment%>,<%=order.Address.street%>,<%=order.Address.city%>,<%=order.Address.state%><br />Pin-code:<%=order.Address.pincode%><br />PhoneNo:<%=order.Address.mobile%>
+                </p>
+                <% }) %>
+
+                <a href="#"></a>
+              </div>
+            </article>
+          </div>
+          <!-- col// -->
+        </div>
+        <!-- row // -->
+      </div>
+    </div>
+  </div>
+</section>
+<section class="main-wrap">
+  <div class="container">
+    <div class="content-header">
+    <div class="table-responsive">
+      <table class="table mb-0 bg-white" id="productsTable">
+        <thead class="bg-light text-center">
+          <tr>
+            <th class="d-none d-sm-table-cell">No</th>
+            <th >Image</th>
+            <th>Product Name</th>
+            <th class="d-none d-sm-table-cell">Category</th>
+            <th >Quantity</th>
+            <th>Status</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% products?.map((data,index)=>{ %>
+          <tr>
+            <td class="d-none d-sm-table-cell"><%=index+1%></td>
+            <td class="">
+              <div class="d-flex align-items-center">
+                <a href="/admin/fullImage/<%=data._id%>">
+                  <img
+                    src="/images/<%=data.image[0]%>"
+                    alt=""
+                    class="rounded-circle"
+                    style="width: 45px; height: 45px"
+                  />
+                </a>
+              </div>
+            </td>
+            <td>
+              <div class="">
+                <p class="fw-bold mb-1"><%=data.productName%></p>
+              </div>
+            </td>
+            <td class="d-none d-sm-table-cell">
+              <p class="fw-normal mb-1"><%=data.category%></p>
+            </td>
+            <td class=""><%=data.quantity%></td>
+            <td>
+              <span class="badge badge-success rounded-pill d-inline"
+                ><%=orderDetails.orderStatus%></span
+              >
+            </td>
+            <td>
+              <span>₹<%=data.price%></span>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+    function changeOrderStatus(orderId,userId){
+        event.preventDefault();
+        let data=$('#changeOrderStatus').serialize();
+            data += '&userId=' + userId;
+        $.ajax({
+            url:'/admin/change-order-status/'+orderId,
+            method:'post',
+            data:data,
+            success:(response)=>{
+                if(response.status){
+                  console.log(response.status);
+                    location.reload()
+                }
+            }
+        })
+
+    }
+</script>
+
+<!-- <script>
+  $("#changeOrderStatus").submit((e) => {
+    e.preventDefault()
+    
+    $.ajax({
+      url: "/admin/change-order-status"+window.location.search,
+      data:$('#changeOrderStatus').serialize(),
+      method:"post",
+      success: (response) => {
+          console.log(response)
+          
+      },
+    });
+  }); -->
+<!-- </script> -->
+
+<style>
+  .main-wrap {
+    background-color: #f8f9fa;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .content-header {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 30px;
+  }
+
+  .card {
+    background-color: #fff;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+</style>

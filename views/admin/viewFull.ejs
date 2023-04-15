@@ -1,0 +1,47 @@
+<section class="main-wrap">
+    <div class="container mt-5 mb-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <% data.forEach(function(data){ %>
+                            <div class="images p-3">
+                                <% for(let i=0;i<data.Image.length;i++){ %>
+                              
+                                    <div class="text-center p-4"> <img id="main-image" src="/images/<%=data.Image[i]%>" width="150" height="150px" /> </div>
+                                    <div class="thumbnail text-center"> </div>
+                                    <%  } %>
+                               
+                               
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="product p-4">
+                               
+                                <div class="mt-4 mb-3"> <span class="text-uppercase text-muted brand"><%=data.ProductName%></span>
+                                    <h5 class="text-uppercase">Men's slim fit t-shirt</h5>
+                                    
+                                    <div class="price d-flex flex-row align-items-center"> <span class="act-price">₹<%=data.OfferPrice%></span>
+                                        <div class="ml-2"> <small class="dis-price">₹ <%= data.Price %></small> </div>
+                                    </div>
+                                    <p><%=data.Category%></p>
+                                    <p>Quantity- <%=data.Quantity%></p>
+                                </div>
+                                <p class="about"><%=data.Description%></p>
+                             
+                                <div class="cart mt-4 align-items-center"> <a href="/admin/view-products"> <button class="btn btn-danger text-uppercase mr-2 px-4">Go back</button> </a>
+                            </div>
+                            <% }) %>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+    body{background-color: #ffffff}.card{border:none}.product{background-color: #eee}.brand{font-size: 13px}.act-price{color:red;font-weight: 700}.dis-price{text-decoration: line-through}.about{font-size: 14px}.color{margin-bottom:10px}label.radio{cursor: pointer}label.radio input{position: absolute;top: 0;left: 0;visibility: hidden;pointer-events: none}label.radio span{padding: 2px 9px;border: 2px solid #ff0000;display: inline-block;color: #ff0000;border-radius: 3px;text-transform: uppercase}label.radio input:checked+span{border-color: #ff0000;background-color: #ff0000;color: #fff}.btn-danger{background-color: #ff0000 !important;border-color: #ff0000 !important}.btn-danger:hover{background-color: #da0606 !important;border-color: #da0606 !important}.btn-danger:focus{box-shadow: none}.cart i{margin-right: 10px}
+</style>

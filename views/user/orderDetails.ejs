@@ -1,0 +1,181 @@
+<section class="h-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-10 col-xl-8">
+        <div class="card" style="border-radius: 10px;">
+          <div class="card-header px-4 py-5">
+          
+            <% address.map((object)=>{ %>
+
+              <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: black;"><%=object.Address.fname%></span>!</h5>
+              <% }) %>
+              <p style="display: none"; id="me"><%= JSON.stringify(locals.data) %></p>
+              <%if(orderDetails.orderStatus == 'Delivered'){%>
+            
+                <button  class=" mt-15 btn btn-suucess bg-dark" onclick="invoiceCreator();Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Download Successfully',
+                  showConfirmButton: false,
+                  timer: 1500
+                })">Download invoice</button>
+              <%}%>
+          </div>
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <p class="lead fw-normal mb-0" style="color: black;">Order Details </p>
+              <p class="small text-muted mb-0">Order Id : <%=orderDetails._id%></p>
+              
+              <h4 class="small text-muted mb-0">Ordered Date: <%= locals.orders[0].orders.createdAt%> </h4>
+              
+            </div>
+            <p class="small text-success mb-0 ">payment-method:<%=orderDetails.paymentMethod%></p>
+            <div class="card shadow-0 border mb-4">
+            <% products?.forEach(function(response) { %>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-2">
+                    <a href="/fullImage/<%=response._id%>">
+                    <img src="/images/<%=response.image[0] %>"
+                      class="img-fluid" alt="Phone"></a>
+                  </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0">Product <%=response.productName%></p>
+                  </div>
+                  
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">Category <%=response.category%></p>
+                  </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">Quantity <%=response.quantity%></p>
+                  </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">Price ₹ <%=response.price%></p>
+                  </div>
+                </div>
+                <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+              
+              </div>
+              <% }) %>
+              </div>
+            <div class="d-flex justify-content-between pt-2">
+              <p class="fw-bold mb-0">Address Details</p>
+              <p class="text-muted mb-0"><span class="fw-bold me-4"></span></p>
+            </div>
+            
+            <% address.map((object)=>{ %>
+              <div class="d-flex justify-content-between pt-2">
+                <p class="fw-bold mb-0"><%= object.Address.fname%></p>
+              <%if(orderDetails.orderStatus=='Placed'){ %>   
+                <p class="text-muted mb-0"><span class="fw-bold me-4" ><span>Order Status</span>:   <span style="color:green;"><%=orderDetails.orderStatus%> </span> </p>
+              <%} else if(orderDetails. orderStatus=='Delivered') {%>
+                <p class="text-muted mb-0"><span class="fw-bold me-4" ><span>Order Status</span>:   <span style="color: orange;"><%=orderDetails. orderStatus%> </span> </p>
+                                  
+              <%} else  {%>
+                                                                            
+                <p class="text-muted mb-0"><span class="fw-bold me-4" ><span>Order Status</span>:   <span style="color: red;"><%=orderDetails. orderStatus%> </span> </p>
+                                                                            
+              <%} %>
+              <%if(orderDetails.orderStatus=='Placed'){ %>   
+               <button  class="btn btn-primary text-center bg-dark"  onclick="cancelOrder('<%=orderDetails._id%>')">Cancel Order</button>
+              <%} %>
+              <%if(orderDetails.orderStatus=='Delivered'){ %>   
+             <button class="text-light" style="background: rgb(0, 0, 0); height:2rem;" onclick="returnOrder('<%=orderDetails._id%>');Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Return Successfully',
+              showConfirmButton: false,
+              timer: 1500
+            })">Return</button>
+              <%} %>
+                  </div>
+              <div class="d-flex justify-content-between pt-2">
+                <p class="fw-bold mb-0">Apartment: <%= object.Address.apartment%></p>
+                <p class="text-muted mb-0"><span class="fw-bold me-4"></span></p>
+              </div>
+              <div class="d-flex justify-content-between pt-2">
+                <p class="fw-bold mb-0">Street: <%= object.Address.street%></p>
+                <p class="text-muted mb-0"><span class="fw-bold me-4">Total</span> ₹<%=orderDetails.total%></p>
+              </div>
+              <div class="d-flex justify-content-between pt-2">
+                <p class="fw-bold mb-0">City: <%= object.Address.city%></p>
+                <p class="text-muted mb-0"><span class="fw-bold me-4"></span></p>
+              </div>
+              <div class="d-flex justify-content-between pt-2">
+                <p class="fw-bold mb-0">PinCode: <%= object.Address.pincode%></p>
+                <p class="fw-bold mb-0">Mobile No: <%= object.Address.mobile%></p>
+                <p class="text-muted mb-0"><span class="fw-bold me-4">Delivery Charges</span>Free</p>
+              </div>
+              <% }) %>
+          </div>
+          <div class="card-footer border-0 px-4 py-5"
+            style="background-color: whitesmoke; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+            <h5 class="d-flex align-items-center justify-content-end text-black text-uppercase mb-0">Total
+              paid: ₹<%=orderDetails.total%><span class="h2 mb-0 ms-2"></span></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row d-flex align-items-center">
+   
+    <div class="col-md-10">
+      
+     
+    </div>
+  </div>
+</section>
+
+<script>
+  function cancelOrder(orderId){
+    Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, cancel it!'
+        }).then((result) => {
+          
+          if (result.isConfirmed) {
+    // console.log(orderId);
+    $.ajax({
+      url:'/cancel-order/'+orderId,
+      method:'put',
+      success:((response)=>{
+        if(response.status){
+          Swal.fire('Canceled!', 'Your address has been Canceled.');
+          location.reload()
+        }
+      })
+    })
+    }})
+  }
+
+  function returnOrder(orderId){
+    $.ajax({
+      url:'/return-order/'+orderId,
+      method:'put',
+      success:((response)=>{
+        if(response.status){
+          console.log(response.status);
+          location.reload()
+        }
+      })
+    })
+  }
+  function invoiceCreator() {
+    //Import the library into your project
+    let data = JSON.parse(document.getElementById('me').innerHTML);
+    console.log(data);
+    //Create your invoice! Easy!
+    easyinvoice.createInvoice(data, function (result) {
+      //The response will contain a base64 encoded PDF file
+      console.log("PDF base64 string: ", result.pdf);
+      easyinvoice.download("invoice.pdf");
+    });
+  }
+  
+</script>
+
