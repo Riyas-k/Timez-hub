@@ -148,7 +148,7 @@ module.exports = {
       } else {
         req.session.mobilNo = mobilNo;
         client.verify.v2
-          .services('VA31b96fdc0d094a86e77e24e2288ebfe6')
+          .services(process.env.Twilio_serviceId)
           .verifications.create({ to: `+91${mobilNo}`, channel: "sms" }) // Remove the space between +91 and mobilNo
           .then(() => {
             req.session.userLoggedIn = true;
@@ -171,7 +171,7 @@ module.exports = {
       let otpNumber = req.body.otp;
       let mobilNo = req.session.mobilNo; // Get the mobilNo value from the session
       await client.verify.v2
-        .services('VA31b96fdc0d094a86e77e24e2288ebfe6')
+        .services(process.env.Twilio_serviceId)
         .verificationChecks.create({ to: `+91${mobilNo}`, code: otpNumber }) // Remove the space between +91 and mobilNo
         .then((verificationChecks) => {
           console.log(verificationChecks);
