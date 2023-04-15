@@ -12,7 +12,6 @@ let accountSID = process.env.Twilio_accountSID
 let authToken = process.env.Twilio_authToken
 
 let client = require("twilio")(accountSID, authToken);
-let mailer = require("../otp/mailer");
 const { Twilio } = require("twilio");
 
 module.exports = {
@@ -207,8 +206,8 @@ module.exports = {
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: mailer.user,
-          pass: mailer.pass,
+          user: process.env.user,
+          pass: process.env.pass,
         },
       });
       console.log(transporter, "tr");

@@ -5,15 +5,18 @@ const cartHelpers = require("../helpers/cartHelpers");
 const orderHelpers = require("../helpers/orderHelper");
 const Razorpay = require("razorpay");
 const paypal = require("paypal-rest-sdk");
-const razorPayDetails = require("../otp/razorpay");
-const paypalDetails = require("../otp/paypal");
+// const razorPayDetails = require("../otp/razorpay");
+// const paypalDetails = require("../otp/paypal");
 const userHelpers = require("../helpers/userHelper");
 const couponHelper = require("../helpers/couponHelper");
 const { orders } = require("@paypal/checkout-server-sdk");
 
+let id = process.env.Razorpay_id;
+let secret_key = process.env.Razorpay_secret_key
+
 var instance = new Razorpay({
-  key_id: "razorPayDetails.id",
-  key_secret: "razorPayDetails.secret_key",
+  key_id: id,
+  key_secret:secret_key,
 });
 
 module.exports = {

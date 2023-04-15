@@ -4,13 +4,16 @@ const { response } = require("../app");
 const ObjectId = require("mongodb").ObjectId;
 var crypto = require("crypto");
 const Razorpay = require("razorpay");
-const razorPayDetails = require("../otp/razorpay");
+// const razorPayDetails = require("../otp/razorpay");
 const { resolve } = require("path");
 const { rejects } = require("assert");
 
+let id = process.env.Razorpay_id;
+let secret_key = process.env.Razorpay_secret_key
+
 var instance = new Razorpay({
-  key_id: razorPayDetails.id,
-  key_secret: razorPayDetails.secret_key,
+  key_id: id,
+  key_secret:secret_key,
 });
 
 module.exports = {
