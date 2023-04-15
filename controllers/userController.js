@@ -4,15 +4,14 @@ let userHelpers = require("../helpers/userHelper");
 const session = require("express-session");
 const productHelpers = require("../helpers/productHelpers");
 const db = require("../models/connection");
-const otp = require("../otp/otp");
 const cartHelpers = require("../helpers/cartHelpers");
 const nodemailer = require("nodemailer");
 const wishListController = require("./wishListController");
 
-// let accountSID = process.env(Twilio.accountSID)
-// let authToken
+let accountSID = process.env.Twilio_accountSID
+let authToken = process.env.Twilio_authToken
 
-let client = require("twilio")(otp.accountSID, otp.authToken);
+let client = require("twilio")(accountSID, authToken);
 let mailer = require("../otp/mailer");
 const { Twilio } = require("twilio");
 
@@ -150,7 +149,7 @@ module.exports = {
       } else {
         req.session.mobilNo = mobilNo;
         client.verify.v2
-          .services(otp.serviceId)
+          .services('VA31b96fdc0d094a86e77e24e2288ebfe6')
           .verifications.create({ to: `+91${mobilNo}`, channel: "sms" }) // Remove the space between +91 and mobilNo
           .then(() => {
             req.session.userLoggedIn = true;
@@ -173,7 +172,7 @@ module.exports = {
       let otpNumber = req.body.otp;
       let mobilNo = req.session.mobilNo; // Get the mobilNo value from the session
       await client.verify.v2
-        .services(otp.serviceId)
+        .services('VA31b96fdc0d094a86e77e24e2288ebfe6')
         .verificationChecks.create({ to: `+91${mobilNo}`, code: otpNumber }) // Remove the space between +91 and mobilNo
         .then((verificationChecks) => {
           console.log(verificationChecks);
