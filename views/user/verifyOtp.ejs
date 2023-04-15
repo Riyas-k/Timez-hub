@@ -12,6 +12,9 @@
                 
                 </div>
                 <form action="/otpVerify" method="post">
+                  <% if ( locals.invalidOtp){%>
+                    <p class="text-danger">Invalid otp</p>
+                  <% }%>
                 <div class="input-container d-flex flex-row justify-content-center mt-2 mb-5">
                   <input placeholder="Enter your Valid Otp here"   name="otp" type="text" class=" text-center form-control rounded">
                   
@@ -27,6 +30,10 @@
                 <div class="mt-3 mb-5">
                   <button type="submit" class="btn btn-success px-4 verify-btn">verify</button>
                 </form>
+                <br>
+                <a href="/login">
+                <button  class="btn btn-success px-4 verify-btn mt-2">Go Back</button>
+                </a>
                 </div>
               </div>
         </div>

@@ -371,5 +371,18 @@ module.exports = {
     } catch (error) {
       console.log(error);
     }
+  },
+  otpUserVerify:(number)=>{
+    return new Promise(async(resolve,reject)=>{
+      console.log(number);
+      try {
+        let result = await db.users.findOne({PhoneNo:number})
+        resolve(result)
+        // console.log(result,'=====otpuser');
+        
+      } catch (error) {
+        console.log(error);
+      }
+    })
   }
 };

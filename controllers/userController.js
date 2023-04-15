@@ -10,6 +10,7 @@ const wishListController = require("./wishListController");
 
 let accountSID = process.env.Twilio_accountSID
 let authToken = process.env.Twilio_authToken
+let serviceId = process.env.Twilio_serviceId
 
 let client = require("twilio")(accountSID, authToken);
 const { Twilio } = require("twilio");
@@ -148,7 +149,7 @@ module.exports = {
       } else {
         req.session.mobilNo = mobilNo;
         client.verify.v2
-          .services(process.env.Twilio_serviceId)
+          .services(serviceId)
           .verifications.create({ to: `+91${mobilNo}`, channel: "sms" }) // Remove the space between +91 and mobilNo
           .then(() => {
             req.session.userLoggedIn = true;
@@ -171,13 +172,15 @@ module.exports = {
       let otpNumber = req.body.otp;
       let mobilNo = req.session.mobilNo; // Get the mobilNo value from the session
       await client.verify.v2
-        .services(process.env.Twilio_serviceId)
+        .services(serviceId)
         .verificationChecks.create({ to: `+91${mobilNo}`, code: otpNumber }) // Remove the space between +91 and mobilNo
-        .then((verificationChecks) => {
-          console.log(verificationChecks);
+        .then(async(verificationChecks) => {
+          console.log(verificationChecks.valid);
           if (verificationChecks.valid) {
-            req.session.userLoggedIn = true;
-            user = req.session.user;
+            let responseUser = await userHelpers.otpUserVerify(mobilNo)
+            console.log(responseUser);
+            // req.session.userLoggedIn = true;
+            // user = responseUser;
             res.redirect("/");
           } else {
             res.render("user/verifyOtp", { invalidOtp: true });
