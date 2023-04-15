@@ -94,7 +94,7 @@ module.exports = {
             {
               $match: {
                 "orders.orderStatus": {
-                  $in: ["Placed", "Delivered"],
+                  $in: ["Delivered"],
                 },
               },
             },
