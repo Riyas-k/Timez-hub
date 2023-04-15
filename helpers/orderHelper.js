@@ -439,12 +439,12 @@ module.exports = {
   verifyPaymentRazorPay: (details) => {
     try {
       return new Promise((resolve, reject) => {
-        let hmac = crypto.createHmac("sha256", razorPayDetails.secret_key);
+        let hmac = crypto.createHmac("sha256", secret_key);
         hmac.update(
           details["payment[razorpay_order_id]"] +
             "|" +
             details["payment[razorpay_payment_id]"],
-          razorPayDetails.secret_key
+            secret_key
         );
         hmac = hmac.digest("hex");
         // console.log(hmac,'hmac');
