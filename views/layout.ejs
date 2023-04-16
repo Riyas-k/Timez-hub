@@ -28,7 +28,7 @@
     <title>Document</title>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="https://unpkg.com/easyinvoice/dist/easyinvoice.min.js"></script>
-    
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
   </head>
   <body>
     <%- include('partials/user-header') %> 
@@ -57,6 +57,12 @@
     <!-- Template  JS -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/shop.js"></script>
- 
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+    <script>
+      $(document).ready(function () {
+        $.fn.dataTable.ext.errMode = 'throw';
+        $('#products').DataTable();
+      });
+    </script>
   </body>
 </html>

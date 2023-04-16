@@ -178,7 +178,9 @@
                   <a href="/orders">Orders <i class=""></i></a>
                 </li>
               
-
+                <!-- <li class="menu-item-has-children">
+                  <span class="menu-expand"></span><a href="/profile">Profile</a>
+                </li> -->
                 <!-- <li>
                   <a href="">Contact</a>
                 </li> -->
@@ -233,13 +235,20 @@
     </div>
     <div class="mobile-header-content-area">
       <div class="mobile-search search-style-3 mobile-header-border">
-        <form action="#">
+        <form action="/search">
           <input type="text" placeholder="Search for items…" />
           <button type="submit"><i class="fi-rs-search"></i></button>
         </form>
       </div>
       <div class="mobile-menu-wrap mobile-header-border">
-     
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <% if (locals.user) { %>
+            <a href="/profile" class="dropdown-item text-dark">Edit Profile</a>
+            <a class="dropdown-item text-dark" href="/logout"> log out</a></li>
+            <%} else { %>
+              <li><a class="dropdown-item text-dark" href="/login"> log in</a></li>
+              <% } %>
+            </ul>
         <!-- mobile menu start -->
         <nav>
           <ul class="mobile-menu">
@@ -252,7 +261,9 @@
             <li class="menu-item-has-children">
               <span class="menu-expand"></span><a href="/orders">Orders</a>
             </li>
-          
+            <li class="menu-item-has-children">
+              <span class="menu-expand"></span><a href="/profile">Profile</a>
+            </li>
           </ul>
         </nav>
     

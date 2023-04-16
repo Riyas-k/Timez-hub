@@ -80,14 +80,13 @@ body {
 
   <div class="container text-center">
     <div class="table-responsive justify-content-center">
-      <table class="table table-striped mb-0" id="productsTable">
+      <table class="table mb-0 table-bordered" id="products">
         <thead>
           <tr class="text-center">
             <th>Order ID</th>
-            <!-- <th>Image</th> -->
-            <!-- <th>Product Name</th> -->
+        
             <th>Date & Time</th>
-            <!-- <th>Quantity</th> -->
+
             <th>Order Status</th>
             <th>Option</th>
           </tr>
@@ -113,7 +112,7 @@ body {
             </td>
           </tr>
           
-          <tr>
+      
            
             <% }) %>
         
@@ -138,7 +137,7 @@ body {
     </div>
     <div class="mobile-header-content-area">
       <div class="mobile-search search-style-3 mobile-header-border">
-        <form action="#">
+        <form action="/search">
           <input type="text" placeholder="Search for items…" />
           <button type="submit"><i class="fi-rs-search"></i></button>
         </form>
@@ -155,24 +154,8 @@ body {
               <span class="menu-expand"></span><a href="/shop">Shop</a>
             </li>
             <li class="menu-item-has-children">
-              <span class="menu-expand"></span><a href="#">Orders</a>
+              <span class="menu-expand"></span><a href="/orders">Orders</a>
             </li>
-            <li class="menu-item-has-children">
-              <span class="menu-expand"></span><a href="blog-category-fullwidth.html">About</a>
-            </li>
-            <li class="menu-item-has-children">
-              <span class="menu-expand"></span><a href="blog-category-fullwidth.html">Contact</a>
-            </li>
-
-            <!-- <li class="menu-item-has-children">
-                <span class="menu-expand"></span><a href="#">Language</a>
-                <ul class="dropdown">
-                  <li><a href="#">English</a></li>
-                  <li><a href="#">French</a></li>
-                  <li><a href="#">German</a></li>
-                  <li><a href="#">Spanish</a></li>
-                </ul>
-              </li> -->
           </ul>
         </nav>
         <!-- mobile menu end -->
