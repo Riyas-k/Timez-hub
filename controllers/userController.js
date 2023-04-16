@@ -22,19 +22,19 @@ module.exports = {
       let perPage = 4;
       let doCount = await userHelpers.doCount();
       // console.log(doCount,'====');
+      await productHelpers.getProducts(pageNo, perPage).then(async (data) => {
+        let pages = Math.ceil(doCount / perPage);
       if (req.session.userLoggedIn) {
-        await productHelpers.getProducts(pageNo, perPage).then(async (data) => {
           let wishListCount = await userHelpers.wishListLength(
             req.session.user.id
           );
           let count = await cartHelpers.getCount(req.session.user.id);
-          let pages = Math.ceil(doCount / perPage);
           let user = req.session.user;
           res.render("user/user", { user, data, pages, count, wishListCount,'search':true });
+        } else {
+         res.render('user/user',{data,pages})
+        }
         });
-      } else {
-        res.redirect("/login");
-      }
     } catch (error) {
       res.status(500);
     }
