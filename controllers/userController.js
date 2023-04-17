@@ -32,7 +32,7 @@ module.exports = {
           let user = req.session.user;
           res.render("user/user", { user, data, pages, count, wishListCount,'search':true });
         } else {
-         res.render('user/user',{data,pages})
+         res.render('user/user',{data,pages,'search':true})
         }
         });
     } catch (error) {
