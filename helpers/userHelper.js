@@ -384,5 +384,33 @@ module.exports = {
         console.log(error);
       }
     })
+  },
+  findProductInCart:(userId)=>{
+      try {
+        return new Promise(async(resolve,reject)=>{
+            let orders = await db.cart.aggregate([
+              {
+                $match:{
+                  user:ObjectId(userId)
+                }
+              },
+              {
+                $unwind:"$cartItems"
+              },
+               {
+                $project:{
+                  data:'$cartItems.productId'
+                }
+               }
+            ])
+
+            // console.log(orders,'kkklkflfld');
+           let result =  orders.map((order)=>order.data)
+           resolve(result)
+          //  console.log(result,'=====');
+        })
+      } catch (error) {
+        console.log(error);
+      }
   }
 };

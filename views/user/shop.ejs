@@ -218,25 +218,35 @@ margin-top:100px;
                         <span class="text-dark">₹<%=data.OfferPrice%></span>
                         <span class="old-price">₹<%=data.Price%></span>
                       </div>
+                      <p hidden></p>
                       <div class="product-action-1 show">
-                          <% if(data.Quantity>0){ %>
-                          <button
-                          aria-label="Add To Cart"
-                          class="action-btn hover-up"
-                            onclick="addToCart('<%= data._id %>'); Swal.fire({
+                        <% if(data.Quantity>0){ %>
+                         
+                        <% if(!data.carted){%>
+                          <button aria-label="Add To Cart" class="action-btn hover-up" onclick="addToCart('<%= data._id %>'); Swal.fire({
                             position: 'center',
                             icon: 'success',
                             title: 'Item Added Successfully To Cart',
                             showConfirmButton: false,
                             timer: 2000
-                          })"
-                          ><i class="fi-rs-shopping-bag-add"></i
-                        ></button>
-                       <%}else{ %>
+                          })">
+                            <i class="fi-rs-shopping-bag-add"></i>
+                          </button>
+                
+                       <% }else{%>
+                        <a href="/cart">
+                       <button aria-label="View Cart" ><i class="fa-sharp fa-solid fa-eye" style="color: #000000;"></i></button></a>
+                       <% }%>
+                        
+                            <!-- If product is not in cart, render Add to Cart button -->
+                          
+                       
+                        <% } else { %>
                           <p class="text-danger" style="font-size: 12px;">out-of-stock</p>
-                       <% } %>
-                   
+                        <% } %>
                       </div>
+                      
+                      
                     </div>
                   </div>
                 </div>
@@ -297,6 +307,7 @@ margin-top:100px;
 
 <script>
   function addToCart(proId){
+
     $.ajax({
       url:'/addToCart/'+proId,
       method:'get',

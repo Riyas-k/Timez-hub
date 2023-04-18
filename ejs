@@ -289,3 +289,27 @@ function deleteAddress(addId){
 <% for(let i=0;i<pages;i++) { %>
   <li class="page-item"><a class="page-link bg-secondary" href="/shop?page=<%=i+1%>"><%=i+1%></a></li>
 <% } %> -->
+
+
+
+
+<!-- // coupons -->
+
+
+<% if(status.includes(true)) { %>
+  <!-- If product is in cart, render View Cart button -->
+  <button aria-label="View Cart" class="action-btn hover-up">
+    <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
+  </button>
+<% } else { %>
+  <!-- If product is not in cart, render Add to Cart button -->
+  <button aria-label="Add To Cart" class="action-btn hover-up" onclick="addToCart('<%= data._id %>'); Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: 'Item Added Successfully To Cart',
+    showConfirmButton: false,
+    timer: 2000
+  })">
+    <i class="fi-rs-shopping-bag-add"></i>
+  </button>
+<% } %>

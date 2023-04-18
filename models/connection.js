@@ -31,6 +31,10 @@ const productSchema = new mongoose.Schema({
     },
     OfferPrice:{
         type:Number
+    },
+    carted:{
+        type:Boolean,
+        default:false
     }
 
 });

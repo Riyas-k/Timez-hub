@@ -40,13 +40,31 @@ module.exports = {
     }
   },
   shop: async (req, res) => {
+  
     try {
       let pageNo = req.query.page;
       let perPage = 8;
       let doCount = await userHelpers.doCount();
       let user = req.session.user;
       let category = await productHelpers.getCategory();
+      // let ifProduct = await
       await productHelpers.getProducts(pageNo, perPage).then(async (data) => {
+        let result1 = data.map((details)=>details._id.toString())
+   console.log(result1);
+        let findProduct = await userHelpers.findProductInCart(req.session.user.id)
+        let result2 = findProduct.map((datas)=>datas.toString())
+        console.log(result2,'data');
+        // let status ;
+        // for(let i=0;i<result1.length;i++){
+        //   for(let j=0;j<result2.length;j++){
+        //     if(result2[i]===findProduct[j]){
+        //        status.push(true)
+        //     }else{
+        //       status.push(false)
+        //     }
+        //   }
+        // }
+        // console.log(status);
         let wishListCount = await userHelpers.wishListLength(
           req.session.user.id
         );
@@ -55,6 +73,8 @@ module.exports = {
           let pages = Math.ceil(doCount / perPage);
           // console.log(data);
           res.render("user/shop", {
+           result1,
+           result2,
             data,
             user,
             pages,

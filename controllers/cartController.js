@@ -80,10 +80,10 @@ module.exports = {
   postCoupon:async(req,res)=>{
     try {
         if(req.body.coupon.length>0){
-        await couponHelper.addCouponIntUserDb(req.body.coupon,req.session.user.id).then((response)=>{
+        req.session.coupon = req.body.coupon
           // console.log(response,';;;;;;;;;;');
           res.redirect('/placeOrder')
-        })
+       
       }else{
         res.redirect('/placeOrder')
       }

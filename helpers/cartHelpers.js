@@ -8,6 +8,8 @@ module.exports = {
     try {
       return new Promise(async (resolve, reject) => {
         let offerPrice = await db.product.findOne({ _id: proId });
+        await db.product.updateOne({_id: proId},{$set:{carted:true}})
+
         // console.log(offerPrice.OfferPrice,'oooo');
         let objCart = {
           productId: proId,
@@ -22,9 +24,11 @@ module.exports = {
           let productExist = carts.cartItems.findIndex(
             (cartItems) => cartItems.productId == proId
           );
-          //   console.log(productExist,'=================');
+          
           if (productExist != -1) {
-            // console.log(productExist,'=================');
+
+            // await db.product.updateOne({_id: proId},{$set:{carted:true}})
+          
             db.cart
               .updateOne(
                 { user: userId, "cartItems.productId": proId },
@@ -142,9 +146,10 @@ module.exports = {
     }
   },
   removeItem: (data) => {
-    // console.log(data);
+    console.log(data,'===++++');
     try {
       return new Promise(async (resolve, reject) => {
+        await db.product.updateOne({_id:data.product},{$set:{carted:false}})
         await db.cart
           .updateOne(
             { user: data.user, "cartItems.productId": data.product },

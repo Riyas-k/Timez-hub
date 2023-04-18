@@ -28,10 +28,15 @@ module.exports = {
       let cartItems = await cartHelpers.listCart(req.session.user.id);
       let offerTotal = await cartHelpers.getOfferTotal(req.session.user.id);
       let wallet = await userHelpers.getWalletAmount(req.session.user.id)
+      if(req.session.couponAmount){
+        offerTotal = req.session.couponAmount
+      }
+      // console.log(req.session.couponAmount,'amount');
       // console.log('riaaz');
       // console.log(offerTotal, "==");
       let Address = await orderHelpers.getAddress(req.session.user.id);
       let wishListCount = await userHelpers.wishListLength(req.session.user.id);
+
       console.log(offerTotal,
         user,
         count,
@@ -62,6 +67,7 @@ module.exports = {
     // console.log(req.body["payment-method"],'[]]]]]]');
     try {
       let offerTotal = await cartHelpers.getOfferTotal(req.session.user.id);
+      await couponHelper.addCouponIntUserDb(req.session.coupon,req.session.user.id)
       await orderHelpers
         .placeOrder(req.body, offerTotal)
         .then(async (response) => {
@@ -406,9 +412,11 @@ module.exports = {
   },
   validateCoupon:async(req,res)=>{
     try {
-      // console.log(req.query.coupon);
+      console.log(req.session.user.id,'uuuuser');
       let total = await cartHelpers.getOfferTotal(req.session.user.id)
        couponHelper.validateCoupon(req.query.coupon,req.session.user.id,total).then((response)=>{
+        console.log(response,'coupon response============');
+        req.session.couponAmount  = response.couponTotal
          res.json(response)
        })
     } catch (error) {

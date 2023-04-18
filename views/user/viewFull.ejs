@@ -128,28 +128,7 @@
                                             <!-- <li><i class="fi-rs-credit-card mr-5"></i> Cash on Delivery available</li> -->
                                         </ul>
                                     </div>
-                                    <!-- <div class="attr-detail attr-color mb-15">
-                                        <strong class="mr-10">Color</strong>
-                                        <ul class="list-filter color-filter">
-                                            <li><a href="#" data-color="Red"><span class="product-color-red"></span></a></li>
-                                            <li><a href="#" data-color="Yellow"><span class="product-color-yellow"></span></a></li>
-                                            <li class="active"><a href="#" data-color="White"><span class="product-color-white"></span></a></li>
-                                            <li><a href="#" data-color="Orange"><span class="product-color-orange"></span></a></li>
-                                            <li><a href="#" data-color="Cyan"><span class="product-color-cyan"></span></a></li>
-                                            <li><a href="#" data-color="Green"><span class="product-color-green"></span></a></li>
-                                            <li><a href="#" data-color="Purple"><span class="product-color-purple"></span></a></li>
-                                        </ul>
-                                    </div> -->
-                                    <!-- <div class="attr-detail attr-size">
-                                        <strong class="mr-10">Size</strong>
-                                        <ul class="list-filter size-filter font-small">
-                                            <li><a href="#">S</a></li>
-                                            <li class="active"><a href="#">M</a></li>
-                                            <li><a href="#">L</a></li>
-                                            <li><a href="#">XL</a></li>
-                                            <li><a href="#">XXL</a></li>
-                                        </ul>
-                                    </div> -->
+                             
                                     <div class="bt-1 border-color-1 mt-30 mb-30"></div>
                                     <div class="detail-extralink">
                                         <!-- <div class="detail-qty border radius">
@@ -160,13 +139,22 @@
                                         <% if(data.Quantity>0){ %>
 
                                             <div class="product-extra-link2">
-                                                <button type="submit" onclick="addToCart('<%= data._id %>'); Swal.fire({
-                                                    position: 'center',
-                                                    icon: 'success',
-                                                    title: 'Item Added Successfully To Cart',
-                                                    showConfirmButton: false,
-                                                    timer: 2000
-                                                })"  class="button button-add-to-cart bg-dark">Add to cart</button>
+                                                <% if(!data.carted){%>
+                                                    <button aria-label="Add To Cart" class="action-btn hover-up btn btn-sm" onclick="addToCart('<%= data._id %>'); Swal.fire({
+                                                      position: 'center',
+                                                      icon: 'success',
+                                                      title: 'Item Added Successfully To Cart',
+                                                      showConfirmButton: false,
+                                                      timer: 2000
+                                                    })">
+                                                      Add to Cart
+                                                    </button>
+                                          
+                                                 <% }else{%>
+                                                  <a href="/cart">
+                                                 <button aria-label="View Cart" class="btn btn-sm ">View Cart</button></a>
+                                                 <% }%>
+                                                  
                                             <!-- <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
                                                 <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a> -->
                                             </div>

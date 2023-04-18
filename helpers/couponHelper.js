@@ -91,7 +91,7 @@ module.exports = {
       return new Promise(async (resolve, reject) => {
         let discountAmount, couponTotal;
         let coupon = await db.coupon.findOne({ couponName: couponCode });
-        // console.log(coupon,'mmm');
+        console.log(coupon,'mmm');
         if (coupon) {
           if (total >= coupon?.minPurchase) {
             discountAmount = (total * coupon.discountPercentage) / 100;
@@ -100,6 +100,7 @@ module.exports = {
             }
           }
           couponTotal = total - discountAmount;
+          
         } else {
           resolve({ status: false, err: "coupon does'nt exist" });
         }
@@ -115,6 +116,38 @@ module.exports = {
             });
             if (!userCouponExist) {
               // console.log("jii");
+              //update cart total value
+               let result =   await db.cart.aggregate([
+                    {
+                      $match:{
+                        user:objectId(userId)
+                      }
+                    },
+                    {
+                      $unwind:"$cartItems"
+                    },
+                    {
+                      $project:{
+                        item:'$cartItems.productId',
+                        quantity:'$cartItems.Quantity'
+                      }
+                    },
+                    {
+                      $lookup:{
+                        from:'products',
+                        localField:'item',
+                        foreignField:'_id',
+                        as:'carted'
+                      }
+                    },
+                    {
+                      $unwind:'$carted'
+                    }
+                   
+                  
+
+                  ])
+                  console.log(result,'-----coupons');
               resolve({
                 discountAmount,
                 couponTotal,
