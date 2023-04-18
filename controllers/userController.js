@@ -21,15 +21,20 @@ module.exports = {
       let pageNo = req.query.page;
       let perPage = 4;
       let doCount = await userHelpers.doCount();
-      // console.log(doCount,'====');
+      console.log(doCount,'====');
       await productHelpers.getProducts(pageNo, perPage).then(async (data) => {
         let pages = Math.ceil(doCount / perPage);
+        console.log(pages)
+        console.log(req.session.user)
       if (req.session.userLoggedIn) {
           let wishListCount = await userHelpers.wishListLength(
             req.session.user.id
           );
+          console.log(wishListCount)
           let count = await cartHelpers.getCount(req.session.user.id);
+          console.log(count)
           let user = req.session.user;
+          console.log(user)
           res.render("user/user", { user, data, pages, count, wishListCount,'search':true });
         } else {
          res.render('user/user',{data,pages,'search':true})
@@ -223,9 +228,10 @@ module.exports = {
           console.log(verificationChecks.valid);
           if (verificationChecks.valid) {
             let responseUser = await userHelpers.otpUserVerify(mobilNo)
-            console.log(responseUser);
-            // req.session.userLoggedIn = true;
-            // user = responseUser;
+            console.log(responseUser,'heleoeoeoo');
+            req.session.userLoggedIn = true;
+            // req.session.user = responseUser;
+            // req.session.user.id = responseUser._id
             res.redirect("/");
           } else {
             res.render("user/verifyOtp", { invalidOtp: true });

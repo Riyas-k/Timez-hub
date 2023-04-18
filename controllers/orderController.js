@@ -214,7 +214,7 @@ module.exports = {
   orderDetails: async (req, res) => {
     try {
       await orderHelpers.orderDetails(req.params.id).then(async (response) => {
-        // console.log(response,'response==>>');
+        console.log(response,'response==>>');
         let count = await cartHelpers.getCount(req.session.user.id);
         await orderHelpers.viewOrders().then(async (orders) => {
           orders.map((order) => {
@@ -237,13 +237,13 @@ module.exports = {
             req.session.user.id
           );
           let data = await orderHelpers.createData(response);
-          if(req.session.couponAmount){
-                total = req.session.couponAmount
-          }
+          // if(req.session.couponAmount){
+          //       total = req.session.couponAmount
+          // }
+          
           res.render("user/orderDetails", {
             products,
             address,
-            total,
             orderDetails,
             user,
             count,
