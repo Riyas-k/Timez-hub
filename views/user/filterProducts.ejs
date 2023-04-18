@@ -175,21 +175,22 @@
                           <span class="old-price">₹<%=data.Price%></span>
                         </div>
                         <div class="product-action-1 show">
-                          <% if(!data.carted){%>
-                            <button aria-label="Add To Cart" class="action-btn hover-up" onclick="addToCart('<%= data._id %>'); Swal.fire({
+                            <% if(data.Quantity>0){ %>
+                            <button
+                            aria-label="Add To Cart"
+                            class="action-btn hover-up"
+                              onclick="addToCart('<%= data._id %>'); Swal.fire({
                               position: 'center',
                               icon: 'success',
                               title: 'Item Added Successfully To Cart',
                               showConfirmButton: false,
                               timer: 2000
-                            })">
-                              <i class="fi-rs-shopping-bag-add"></i>
-                            </button>
-                  
-                         <% }else{%>
-                          <a href="/cart">
-                         <button aria-label="View Cart" ><i class="fa-sharp fa-solid fa-eye" style="color: #000000;"></i></button></a>
-                         <% }%>
+                            })"
+                            ><i class="fi-rs-shopping-bag-add"></i
+                          ></button>
+                         <%}else{ %>
+                          <p class="text-danger" style="font-size: 12px;">out-of-stock</p>
+                         <% } %>
                      
                         </div>
                       </div>

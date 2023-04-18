@@ -48,12 +48,38 @@ module.exports = {
       let user = req.session.user;
       let category = await productHelpers.getCategory();
       // let ifProduct = await
-      await productHelpers.getProducts(pageNo, perPage).then(async (data) => {
-        let result1 = data.map((details)=>details._id.toString())
-   console.log(result1);
-        let findProduct = await userHelpers.findProductInCart(req.session.user.id)
-        let result2 = findProduct.map((datas)=>datas.toString())
-        console.log(result2,'data');
+      // let findProduct = await userHelpers.findProductInCart(req.session.user.id);
+      await productHelpers.getProducts(pageNo, perPage).then(async (data) => {  
+        //console.log(Object.getOwnPropertyDescriptor(window, "data"));
+        // data.forEach(element => {
+        //   // console.log(Object.getOwnPropertyDescriptor(window, element));
+        //   for(let i=0;i<findProduct.length;i++){
+        //     //console.log("carted  567890-: ", element._id)
+        //     //console.log("carted proditcs : ", findProduct)
+        //     if(element._id.toString() === findProduct[i].toString()){
+        //       console.log(element._id, findProduct[i]);
+        //       console.log(element)
+        //       console.log("somefydshcisjdcSHciLSHc")
+        //       // element.Category="something";
+        //       element['carted'] = "true";
+        //       element.carting = "added";
+        //       element['catreeeing']="something "
+        //       break;
+        //       //Object.assign({}, element, {cartedByMe: 'something ada=ed'});
+        //       console.log("paases")
+        //     }else{
+        //       continue;
+        //     }
+        //   }
+        // });
+        // data[0].carted="carted success";
+        // console.log(data)
+
+  //       let result1 = data.map((details)=>details._id.toString())
+  //  console.log(result1);
+        // let findProduct = await userHelpers.findProductInCart(req.session.user.id)
+  //       let result2 = findProduct.map((datas)=>datas.toString())
+  //       console.log(result2,'data');
         // let status ;
         // for(let i=0;i<result1.length;i++){
         //   for(let j=0;j<result2.length;j++){
@@ -73,8 +99,7 @@ module.exports = {
           let pages = Math.ceil(doCount / perPage);
           // console.log(data);
           res.render("user/shop", {
-           result1,
-           result2,
+          
             data,
             user,
             pages,

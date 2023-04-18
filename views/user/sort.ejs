@@ -176,7 +176,7 @@
                         </div>
                         <div class="product-action-1 show">
                             <% if(data.Quantity>0){ %>
-                              <% if(!data.carted){%>
+                        
                                 <button aria-label="Add To Cart" class="action-btn hover-up" onclick="addToCart('<%= data._id %>'); Swal.fire({
                                   position: 'center',
                                   icon: 'success',
@@ -187,10 +187,6 @@
                                   <i class="fi-rs-shopping-bag-add"></i>
                                 </button>
                       
-                             <% }else{%>
-                              <a href="/cart">
-                             <button aria-label="View Cart" ><i class="fa-sharp fa-solid fa-eye" style="color: #000000;"></i></button></a>
-                             <% }%>
                          <%}else{ %>
                           <p class="text-danger" style="font-size: 12px;">out-of-stock</p>
                          <% } %>

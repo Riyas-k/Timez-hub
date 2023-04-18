@@ -222,7 +222,7 @@ margin-top:100px;
                       <div class="product-action-1 show">
                         <% if(data.Quantity>0){ %>
                          
-                        <% if(!data.carted){%>
+                      
                           <button aria-label="Add To Cart" class="action-btn hover-up" onclick="addToCart('<%= data._id %>'); Swal.fire({
                             position: 'center',
                             icon: 'success',
@@ -233,11 +233,7 @@ margin-top:100px;
                             <i class="fi-rs-shopping-bag-add"></i>
                           </button>
                 
-                       <% }else{%>
-                        <a href="/cart">
-                       <button aria-label="View Cart" ><i class="fa-sharp fa-solid fa-eye" style="color: #000000;"></i></button></a>
-                       <% }%>
-                        
+                 
                             <!-- If product is not in cart, render Add to Cart button -->
                           
                        

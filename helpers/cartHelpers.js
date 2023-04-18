@@ -8,7 +8,7 @@ module.exports = {
     try {
       return new Promise(async (resolve, reject) => {
         let offerPrice = await db.product.findOne({ _id: proId });
-        await db.product.updateOne({_id: proId},{$set:{carted:true}})
+        // await db.product.updateOne({_id: proId},{$set:{carted:true}})
 
         // console.log(offerPrice.OfferPrice,'oooo');
         let objCart = {
@@ -146,10 +146,10 @@ module.exports = {
     }
   },
   removeItem: (data) => {
-    console.log(data,'===++++');
+    // console.log(data,'===++++');
     try {
       return new Promise(async (resolve, reject) => {
-        await db.product.updateOne({_id:data.product},{$set:{carted:false}})
+        // await db.product.updateOne({_id:data.product},{$set:{carted:false}})
         await db.cart
           .updateOne(
             { user: data.user, "cartItems.productId": data.product },

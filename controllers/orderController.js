@@ -237,9 +237,13 @@ module.exports = {
             req.session.user.id
           );
           let data = await orderHelpers.createData(response);
+          if(req.session.couponAmount){
+                total = req.session.couponAmount
+          }
           res.render("user/orderDetails", {
             products,
             address,
+            total,
             orderDetails,
             user,
             count,
