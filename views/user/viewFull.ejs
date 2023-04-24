@@ -137,8 +137,14 @@
                                             <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                         </div> -->
                                         <% if(data.Quantity>0){ %>
-
+                                            
                                             <div class="product-extra-link2">
+          
+                                            <% if(findProduct.toString().includes(data._id)){%>
+                                                <a href="/cart">
+                                                <button class="button button-add-to-cart bg-dark btn-sm">view cart</button></a>
+                                            <%}else{%>
+                                                
                                                 <button type="submit" onclick="addToCart('<%= data._id %>'); Swal.fire({
                                                     position: 'center',
                                                     icon: 'success',
@@ -148,6 +154,7 @@
                                                 })"  class="button button-add-to-cart bg-dark">Add to cart</button>
                                             <!-- <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
                                                 <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a> -->
+                                                <%}%>
                                             </div>
                                             <%} else{ %>
                                                 <p class="text-danger">out-of-stock</p>

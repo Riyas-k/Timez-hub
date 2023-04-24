@@ -295,21 +295,34 @@ function deleteAddress(addId){
 
 <!-- // coupons -->
 
+<% if(findProduct.length>0){%>
+  <% findProduct.forEach((newOne)=>{ %>
+  
+      <% if(data._id.toString() === newOne.toString()){ %>
+       
+       <a href="/cart">
+         <button aria-label="View Cart" class="action-btn hover-up">
+           <i class="fa-solid fa-eye" style="color: #000000;"></i>
+         </button>
+       </a>
+      
+     <% }else{%>
+    
 
-<% if(status.includes(true)) { %>
-  <!-- If product is in cart, render View Cart button -->
-  <button aria-label="View Cart" class="action-btn hover-up">
-    <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #000000;"></i>
-  </button>
-<% } else { %>
-  <!-- If product is not in cart, render Add to Cart button -->
-  <button aria-label="Add To Cart" class="action-btn hover-up" onclick="addToCart('<%= data._id %>'); Swal.fire({
-    position: 'center',
-    icon: 'success',
-    title: 'Item Added Successfully To Cart',
-    showConfirmButton: false,
-    timer: 2000
-  })">
-    <i class="fi-rs-shopping-bag-add"></i>
-  </button>
-<% } %>
+         <button aria-label="Add To Cart" class="action-btn hover-up" onclick="addToCart('<%= data._id %>'); Swal.fire({
+           position: 'center',
+           icon: 'success',
+           title: 'Item Added Successfully To Cart',
+           showConfirmButton: false,
+           timer: 2000
+         })">
+         <i class="fi-rs-shopping-bag-add"></i>
+       </button>
+     
+    <% }%>
+  
+      <% })%>
+      <%}else {%>
+   
+       
+      <%}%>

@@ -81,7 +81,7 @@ module.exports = {
     try {
         if(req.body.coupon.length>0){
         req.session.coupon = req.body.coupon
-          // console.log(response,';;;;;;;;;;');
+       
           res.redirect('/placeOrder')
        
       }else{

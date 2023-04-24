@@ -232,11 +232,13 @@ module.exports = {
     try {
       let count = await cartHelpers.getCount(req.session.user.id);
       let wishListCount = await userHelpers.wishListLength(req.session.user.id);
+      let findProduct = await userHelpers.findProductInCart(req.session.user.id);
       await productHelpers.getFull(req.params.id).then((datas) => {
         // console.log(datas,'====');
         let data = datas[0];
         let user = req.session.user;
-        res.render("user/viewFull", { data, user, count, wishListCount });
+        console.log(findProduct,'====');
+        res.render("user/viewFull", { data, user, count, wishListCount,findProduct });
       });
     } catch (error) {
       res.status(500);

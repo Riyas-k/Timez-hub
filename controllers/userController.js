@@ -53,9 +53,26 @@ module.exports = {
       let user = req.session.user;
       let category = await productHelpers.getCategory();
       // let ifProduct = await
-      // let findProduct = await userHelpers.findProductInCart(req.session.user.id);
-      await productHelpers.getProducts(pageNo, perPage).then(async (data) => {  
-        //console.log(Object.getOwnPropertyDescriptor(window, "data"));
+      let findProduct = await userHelpers.findProductInCart(req.session.user.id);
+         await productHelpers.getProducts(pageNo, perPage).then(async (data) => {  
+
+      console.log(data,'---');
+
+      // for (let key in data) {
+      //   console.log(data[key],'====');
+      //   console.log('giei');
+      //   for(let i=0;i<findProduct.length;i++){
+      //     console.log(findProduct);
+      //     console.log('fkjhgkdfhgf');
+      //       if(data[key]._id.toString() === findProduct[i].toString()){
+      //        console.log(data[key],'==---');
+      //         data[key].carted = true;
+      //         console.log('jelooo');
+      //       }
+      //   }
+      // }
+
+        // console.log(Object.getOwnPropertyDescriptor(window, "data"));
         // data.forEach(element => {
         //   // console.log(Object.getOwnPropertyDescriptor(window, element));
         //   for(let i=0;i<findProduct.length;i++){
@@ -66,11 +83,11 @@ module.exports = {
         //       console.log(element)
         //       console.log("somefydshcisjdcSHciLSHc")
         //       // element.Category="something";
-        //       element['carted'] = "true";
-        //       element.carting = "added";
-        //       element['catreeeing']="something "
-        //       break;
-        //       //Object.assign({}, element, {cartedByMe: 'something ada=ed'});
+        //       // element['carted'] = "true";
+        //       element.carted ="added";
+        //       // element['catreeeing']="something "
+        //       // break;
+        //       // Object.assign({}, element, {cartedByMe: 'something ada=ed'});
         //       console.log("paases")
         //     }else{
         //       continue;
@@ -78,24 +95,8 @@ module.exports = {
         //   }
         // });
         // data[0].carted="carted success";
-        // console.log(data)
+        console.log(data)
 
-  //       let result1 = data.map((details)=>details._id.toString())
-  //  console.log(result1);
-        // let findProduct = await userHelpers.findProductInCart(req.session.user.id)
-  //       let result2 = findProduct.map((datas)=>datas.toString())
-  //       console.log(result2,'data');
-        // let status ;
-        // for(let i=0;i<result1.length;i++){
-        //   for(let j=0;j<result2.length;j++){
-        //     if(result2[i]===findProduct[j]){
-        //        status.push(true)
-        //     }else{
-        //       status.push(false)
-        //     }
-        //   }
-        // }
-        // console.log(status);
         let wishListCount = await userHelpers.wishListLength(
           req.session.user.id
         );
@@ -104,7 +105,7 @@ module.exports = {
           let pages = Math.ceil(doCount / perPage);
           // console.log(data);
           res.render("user/shop", {
-          
+            findProduct,
             data,
             user,
             pages,
